@@ -1,0 +1,142 @@
+import React, { Component } from 'react';
+import { View, TextInput, Alert,Image, Text, Dimensions } from 'react-native';
+import { connect } from 'react-redux';
+import firebase from 'firebase';
+import { actEmailChanged, actPasswordChanged, actUserLogin } from '../actions';
+//import action from '../actions';
+
+import { Button, CardSection, Card, Header, FacebookButton } from '../ortak';
+import { Actions } from 'react-native-router-flux';
+
+const window = Dimensions.get('window');
+
+class LoginForm extends Component {
+   //state = { kullaniciadi: '', sifre: ''};
+
+   OnClickLogin() {
+    console.log('LoginFormjsteki OnClickLogin fonksiyonu tamamlandı'); 
+    const { prUsername, prPassword } = this.props;
+    this.props.actUserLogin({prUsername, prPassword });
+   }
+  /*
+   OnClickRegister() {
+    console.log('LoginFormjsteki OnClickRegister fonksiyonu tamamlandı');
+    const { kullaniciadi, sifre } = this.state;
+    firebase.auth().createUserWithEmailAndPassword(kullaniciadi, sifre)
+    .then(this.KayitBasarili.bind(this))
+    .catch(() => console.log('Lütfen geçerli bir e-mail adresi giriniz.'));
+   }*/
+
+   KayitBasarili() {
+    console.log('LoginFormjsteki KayitBasarili fonksiyonu calisti');
+  }
+
+  renderGiris() {
+      console.log('LoginFormjsteki renderGiris fonksiyonu calisti');
+      return <Button onPress={this.OnClickLogin.bind(this)}> GİRİŞ YAP </Button>;
+  }
+
+  goToRegister() {
+    Actions.goRegister();
+  }
+
+  renderKayit() {
+    console.log('LoginFormjsteki renderKayit fonksiyonu calisti');
+      return <Button onPress={() => this.goToRegister()}> KAYIT OL </Button>;
+  }
+
+    render() {
+      console.log('loginForm componenti render oldu');
+      console.log('kullaniciadi: ' + this.props.prUsername);
+      console.log('sifre: ' + this.props.prPassword);
+
+        const { inputStyle } = styles;
+        return (
+        <View style={{ marginTop: 50, backgroundColor: 'transparent', flex:1}}>
+          <View style={{ 
+            backgroundColor:'transparent', flex: 1 }}>
+          <Image 
+            source={require('../images/background.png')} 
+            style={{ 
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+            }}
+           />
+              <View
+                style={{
+                  flex: 1,
+                  backgroundColor: 'transparent',
+                  //justifyContent: 'center',
+                }}
+              >
+                <Image source={require('../images/logomuz2.png')} style={{ marginTop:50, marginLeft:150, width: 120, height: 120 }} />
+                <CardSection>
+                <TextInput
+                placeholder="Kullanıcı Adı"
+                style={inputStyle}
+                value={this.props.prUsername}
+                underlineColorAndroid='white'
+                onChangeText={degisentext => this.props.actEmailChanged({ stUsername: degisentext })}
+                />
+              </CardSection>
+
+              <CardSection>
+                <TextInput
+                  secureTextEntry
+                  placeholder="Şifre"
+                  style={inputStyle}
+                  value={this.props.prPassword}
+                  underlineColorAndroid='white'
+                  onChangeText={degisentext => this.props.actPasswordChanged({ stPassword: degisentext })}
+                />
+              </CardSection>
+              <CardSection>
+                {this.renderGiris()}
+                {this.renderKayit()}
+              </CardSection>
+              <CardSection>
+                <View style={{justifyContent:'center', flex:1}} >
+                  <Text style={{ alignSelf: 'center', fontSize: 18, color: 'white' }}> VEYA </Text>
+                </View>
+              </CardSection>
+              <CardSection>
+                <FacebookButton onPress={this.OnClickLogin.bind(this)}> FACEBOOK ILE GİRİŞ YAP </FacebookButton>
+              </CardSection>
+            </View>
+          </View>
+        </View>
+        );
+    }
+}
+
+const styles = {
+  inputStyle: {
+    paddingRight: 5,
+    paddingLeft: 5,
+    fontSize: 18,
+    flex: 1,
+    marginLeft: 5,
+    marginRight: 5,
+    borderWidth: 0,
+    color: '#ffffff',
+    borderColor: 'transparent',
+  },
+};
+/** Reducer'dan gelen state'leri component'imizde propsolarak kullanabilmemiz
+ * sağlıyor.
+ */
+const mapStateToProps = ({ authenticationResponse }) => {
+   const { username, password } = authenticationResponse;
+
+   const prUsername = username;
+   const prPassword = password;
+   
+   //console.log('mapstatetoprops kullaniciadi :' + prUsername);
+   //console.log('mapstatetoprops sifre ' + prPassword);
+   return { prUsername, prPassword };
+};
+
+export default connect(mapStateToProps, { actEmailChanged, actPasswordChanged, actUserLogin })(LoginForm);
