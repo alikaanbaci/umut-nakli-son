@@ -24,7 +24,9 @@ class ListDiscoverFriends extends Component {
     }
 
      renderRow(name) {
-        return <ListItemDiscoverFriends name={ name } />;
+         console.log("KULLANACAGIM RENDER ROW:");
+         console.log(name);
+        return <ListItemDiscoverFriends name={name} />;
     }
 
     render() {

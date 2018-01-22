@@ -148,10 +148,11 @@ import { REGISTER_EMAIL_CHANGED,
                     gender, profileType, disaseType, disaseStage, cureNumber, hospital) => {
                     firebase.auth().createUserWithEmailAndPassword(email, password).then((user) => {
                         console.log('kayit basarili');
+                        // burdaki username name olarak değiştirildi.
                         database.ref('kullanicilar/' + user.uid).set({
                             email: email,
                             password: password,
-                            username: username,
+                            name: username,
                             age: age,
                             province: province,
                             gender: gender,

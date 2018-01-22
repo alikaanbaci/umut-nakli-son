@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableWithoutFeedback, TouchableOpacity, Image, Button, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import firebase, { database } from 'firebase';
+import { actSendFriendshipRequest } from '../actions';
 import { CardSection } from '../ortak';
 import ProfileNonFriends from './ProfileNonFriends';
 
@@ -10,11 +13,22 @@ class ListItemDiscoverFriends extends Component {
         Actions.profilenonfriend();
     }
 
+    sendFriendshipRequest(uid, name) {
+        console.log(uid);
+        console.log(name);
+        const database = firebase.database();
+        const { currentUser } = firebase.auth();
+        database.ref('kullanicilar/' + currentUser.uid + '/friendshipRequest/' + uid).set({
+            requesterName: name
+        });
+    }
+
     render() {
-        const { name } = this.props.name;
+        const { name, uid } = this.props.name;
         //const { name } = this.props;
         console.log('ListItemDiscoverFriends e gelen veri-->');
-        console.log({ name });
+        console.log(name);
+        console.log(uid);
         return (
             //<TouchableWithoutFeedback onPress={this.onPostClick.bind(this)}>
             <TouchableWithoutFeedback onPress={() => console.log("tiklama ulan")}>
@@ -31,6 +45,9 @@ class ListItemDiscoverFriends extends Component {
                         </View>
                         <TouchableOpacity onPress={() => this.goProfile()} style={styles.buttonStyle}>
                             <Image source={require('../icons/ekle.jpg')} style={{ alignSelf: 'center', width: 30, height: 30 }} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.sendFriendshipRequest(uid, name)} style={styles.buttonStyle}>
+                            <Image source={require('../icons/star.png')} style={{ alignSelf: 'center', width: 30, height: 30 }} />
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -97,6 +114,17 @@ const styles = StyleSheet.create({
     position: 'relative'
 }
 });
+/*
+const mapStateToProps = ({ nonFriendsResponse }) => { 
+    const nonFriendsArray = _.map(nonFriendsResponse, ({ name }, uid) => {
+        return { name, uid };
+    });
+    console.log("burasi ListItemDiscoverFriendsin mapstatetopropsu : ");
+    console.log(nonFriendsArray);
+    const a = "a";
+    return { a };
+};
 
-
+export default connect(mapStateToProps, { actSendFriendshipRequest })(ListItemDiscoverFriends);
+*/
 export default ListItemDiscoverFriends;

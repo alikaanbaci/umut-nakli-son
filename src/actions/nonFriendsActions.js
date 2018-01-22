@@ -27,8 +27,6 @@ export const actNonFriendsLoad = () => {
                 //snapshot.forEach((childSnapshot) => {
                     //console.log(childSnapshot.key);
                     //console.log(childSnapshot.val());
-                
-          
                 if (snapshot.val() === null)
                 {
                     dispatch({ type: NONFRIENDS_LOAD, payload: {} });
@@ -38,9 +36,33 @@ export const actNonFriendsLoad = () => {
                         const gelenuser = childSnapshot.val();
                         dispatch({ type: NONFRIENDS_LOAD, payload: snapshot.val() });
                     });
-                    
                 }
-               
             });
     };
 };
+/*
+export const actSendFriendshipRequest = () => {
+    const database = firebase.database();
+    console.log("REQUEST ACTION CALISTI");
+    return (dispatch) => {
+        database.ref(`kullanicilar`)
+            .on('value', snapshot => {
+                //console.log('AAA VERİLER GELDİ-------');
+                //console.log(snapshot.val());
+                //snapshot.forEach((childSnapshot) => {
+                    //console.log(childSnapshot.key);
+                    //console.log(childSnapshot.val());
+                if (snapshot.val() === null)
+                {
+                    dispatch({ type: NONFRIENDS_LOAD, payload: {} });
+                }
+                else {
+                    snapshot.forEach((childSnapshot) => {
+                        const gelenuser = childSnapshot.val();
+                        dispatch({ type: NONFRIENDS_LOAD, payload: snapshot.val() });
+                    });
+                }
+            });
+    };
+};
+*/
