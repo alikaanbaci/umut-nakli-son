@@ -15,6 +15,10 @@ export const REGISTER_CURENUMBER_CHANGED = 'register_cure_number_changed';
 export const REGISTER_HOSPITAL_CHANGED = 'register_hospital_changed';
 // buraya kadar
 
+//arkadas ekleme icin reducer type'ları
+export const REQUEST_SUCCESS = 'request_successed';
+export const REQUEST_FAILED = 'request_failed';
+
 
 export const USER_LOGIN = 'user_login';
 export const LOGIN_SUCCESS = 'login_success';

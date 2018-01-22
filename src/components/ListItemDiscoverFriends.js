@@ -14,13 +14,7 @@ class ListItemDiscoverFriends extends Component {
     }
 
     sendFriendshipRequest(uid, name) {
-        console.log(uid);
-        console.log(name);
-        const database = firebase.database();
-        const { currentUser } = firebase.auth();
-        database.ref('kullanicilar/' + currentUser.uid + '/friendshipRequest/' + uid).set({
-            requesterName: name
-        });
+        this.props.actSendFriendshipRequest(uid, name);
     }
 
     render() {
@@ -114,17 +108,15 @@ const styles = StyleSheet.create({
     position: 'relative'
 }
 });
-/*
+
 const mapStateToProps = ({ nonFriendsResponse }) => { 
-    const nonFriendsArray = _.map(nonFriendsResponse, ({ name }, uid) => {
+    /*const nonFriendsArray = _.map(nonFriendsResponse, ({ name }, uid) => {
         return { name, uid };
     });
     console.log("burasi ListItemDiscoverFriendsin mapstatetopropsu : ");
-    console.log(nonFriendsArray);
+    console.log(nonFriendsArray);*/
     const a = "a";
     return { a };
 };
 
 export default connect(mapStateToProps, { actSendFriendshipRequest })(ListItemDiscoverFriends);
-*/
-export default ListItemDiscoverFriends;

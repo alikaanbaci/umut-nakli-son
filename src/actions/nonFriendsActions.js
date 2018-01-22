@@ -1,6 +1,6 @@
 import firebase  from 'firebase';
 import { Actions } from 'react-native-router-flux';
-import { NONFRIENDS_LOAD } from './types';
+import { NONFRIENDS_LOAD, REQUEST_SUCCESS, REQUEST_FAILED } from './types';
 
 export const actNonFriendsLoad = () => {
     const database = firebase.database();
@@ -40,29 +40,24 @@ export const actNonFriendsLoad = () => {
             });
     };
 };
-/*
-export const actSendFriendshipRequest = () => {
+
+export const actSendFriendshipRequest = (uid, name) => {
     const database = firebase.database();
+    const { currentUser } = firebase.auth();
     console.log("REQUEST ACTION CALISTI");
     return (dispatch) => {
-        database.ref(`kullanicilar`)
-            .on('value', snapshot => {
-                //console.log('AAA VERİLER GELDİ-------');
-                //console.log(snapshot.val());
-                //snapshot.forEach((childSnapshot) => {
-                    //console.log(childSnapshot.key);
-                    //console.log(childSnapshot.val());
-                if (snapshot.val() === null)
-                {
-                    dispatch({ type: NONFRIENDS_LOAD, payload: {} });
-                }
-                else {
-                    snapshot.forEach((childSnapshot) => {
-                        const gelenuser = childSnapshot.val();
-                        dispatch({ type: NONFRIENDS_LOAD, payload: snapshot.val() });
-                    });
-                }
-            });
+        console.log(uid);
+        console.log(name);
+        database.ref('kullanicilar/' + currentUser.uid + '/friendshipRequest/' + uid).set({
+            requesterName: name
+        }).then(() => {
+            dispatch({ type: REQUEST_SUCCESS });
+        }).catch(() => {
+            dispatch({ type: REQUEST_FAILED });
+        });
+        database.ref('kullanicilar/' + uid + '/incomingFriendshipRequest/' + currentUser.uid).set({
+            requesterUid: currentUser.uid
+        });
+        //dispatch({ type: REQUEST_SUCCESS });
     };
 };
-*/
