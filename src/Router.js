@@ -16,6 +16,7 @@ import RegisterPersonalInfoForm from './components/RegisterPersonalInfoForm';
 import RegisterDisaseInfoForm from './components/RegisterDisaseInfoForm';
 import RegisterAccountInfoForm from './components/RegisterAccountInfoForm';
 import PostDetay from './components/PostDetay';
+import SendedRequests from './components/SendedRequests';
 
 
 const HomeIcon = ()=> {
@@ -222,10 +223,20 @@ class RouterComponent extends Component {
                                 titleStyle={{color:'black',fontSize: 17,
                                 textShadowColor:'dimgray', textShadowOffset:{width:1,height:1}}}
                              />
-
-                    
+                              <Scene
+                                onLeft={() => console.log('Geriye basti')}
+                                renderLeftButton={() =>
+                                <TouchableOpacity onPress={()=> Actions.mosu_friends() }>
+                                <Image source={require('./icons/back.png')} style={{ width: 40, height: 35 }} />
+                                </TouchableOpacity>}   
+                                key="sendedrequests" 
+                                component={SendedRequests} 
+                                navigationBarStyle={{ backgroundColor: '#e0ebeb', shadowOpacity:20 }}
+                                title="Gönderilen istekler"
+                                titleStyle={{color:'black',fontSize: 17,
+                                textShadowColor:'dimgray', textShadowOffset:{width:1,height:1}}}
+                             />
                     </Scene>
-
                     <Scene key="mosu_myfriends" title="Arkadaslar" icon={ProfileIcon}>
                         <Scene
                             navigationBarStyle={{shadowOpacity:10}} 

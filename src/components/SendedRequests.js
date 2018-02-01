@@ -3,15 +3,17 @@ import { View, Text, ListView, StyleSheet, Image, TouchableOpacity } from 'react
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash';
-import { actNonFriendsLoad } from '../actions';
+import { actFriendshipRequestLoad } from '../actions';
 import ListItemDiscoverFriends from './ListItemDiscoverFriends';
+import ListItemRequestFriends from './ListItemRequestFriends';
 
  
-class ListDiscoverFriends extends Component {
+class SendedRequests extends Component {
 
 
     componentWillMount() {
-        this.props.actNonFriendsLoad();
+        console.log("SENDED REQUEST LOAD DAN ONCE");
+        this.props.actFriendshipRequestLoad();
         this.createDataSource(this.props);
     }
 
@@ -19,22 +21,22 @@ class ListDiscoverFriends extends Component {
         this.createDataSource(nextProps);
     }
 
-    createDataSource({ nonFriendsArray }) {
+    createDataSource({ friendshipRequestArray }) {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
-        this.dataSource = ds.cloneWithRows(nonFriendsArray);
+        this.dataSource = ds.cloneWithRows(friendshipRequestArray);
     }
 
-    renderRow(name, uid) {
-        return <ListItemDiscoverFriends name={ name } uid={uid} />;
+    renderRow(requesterName, uid) {
+        return <ListItemRequestFriends requester={requesterName} uid={uid} />;
     }
     goSendedRequest() {
         Actions.sendedrequests();
     }
     render() {
         console.log('nonfriendslist form render oldu');
-        console.log(this.props.nonFriendsArray);
+        console.log(this.props.friendshipRequestArray);
         return (
             
             <View style={styles.container}>
@@ -74,13 +76,13 @@ class ListDiscoverFriends extends Component {
     }
 }
 
-const mapStateToProps = ({ nonFriendsResponse }) => { 
-    const nonFriendsArray = _.map(nonFriendsResponse, ({ name }, uid ) => {
-        return { name, uid };
+const mapStateToProps = ({ friendshipRequestResponse }) => { 
+    const friendshipRequestArray = _.map(friendshipRequestResponse, ({ requesterName }, uid ) => {
+        return { requesterName, uid };
     });
     console.log("burasi ListDiscoverFriendsin mapstatetopropsu : ");
-    console.log(nonFriendsArray);
-    return { nonFriendsArray };
+    console.log(friendshipRequestArray);
+    return { friendshipRequestArray };
 };
 
 const styles = StyleSheet.create(
@@ -112,4 +114,4 @@ const styles = StyleSheet.create(
     }
 );
 
-export default connect(mapStateToProps, { actNonFriendsLoad })(ListDiscoverFriends);
+export default connect(mapStateToProps, { actFriendshipRequestLoad })(SendedRequests);
