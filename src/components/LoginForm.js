@@ -131,8 +131,11 @@ const styles = {
 const mapStateToProps = ({ authenticationResponse }) => {
    const { username, password } = authenticationResponse;
 
-   const prUsername = username;
-   const prPassword = password;
+   let prUsername = username;
+   let prPassword = password;
+
+   prUsername = 'ccc@gmail.com';
+   prPassword = 'ccc123'; 
    
    //console.log('mapstatetoprops kullaniciadi :' + prUsername);
    //console.log('mapstatetoprops sifre ' + prPassword);

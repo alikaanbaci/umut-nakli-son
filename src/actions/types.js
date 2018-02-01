@@ -19,7 +19,6 @@ export const REGISTER_HOSPITAL_CHANGED = 'register_hospital_changed';
 export const REQUEST_SUCCESS = 'request_successed';
 export const REQUEST_FAILED = 'request_failed';
 
-
 export const USER_LOGIN = 'user_login';
 export const LOGIN_SUCCESS = 'login_success';
 export const LOGIN_FAIL = 'login_fail';

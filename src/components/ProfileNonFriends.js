@@ -1,21 +1,33 @@
 import React, { Component } from 'react';
-import { View, Text, ListView, StyleSheet, Image, TextInput, ScrollView } from 'react-native';
+import { View, Text, ListView, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { actPostLoad } from '../actions';
 import ListItem from './ListItem';
 import { CardSection,Button } from '../ortak/index';
+import PostListForm from './PostListForm';
+import { Actions } from 'react-native-router-flux';
  
 class ProfileNonFriends extends Component {
     
     constructor(props) {
         super(props);
-        this.state = {durum: 'BAĞLANTI KUR' };
+        this.state = {durum: 'BAĞLANTI KUR', postlarigetir:'hayir' };
     
         // Toggle the state every second
         /*setInterval(() => {
           this.setState({ showText: !this.state.durum });
         }, 1000);*/
+      }
+
+      goPosts() {
+          this.setState({ postlarigetir:'evet' });
+          console.log('Userin postları yuklendi');
+          this.loadPosts();
+      }
+
+      loadPosts(){
+          console.log('loadPosts() fonksiyonu calisti');
       }
 
 
@@ -25,7 +37,7 @@ class ProfileNonFriends extends Component {
         return (
             <ScrollView style={styles.container}>
                 <View style={styles.subContainerStyle} >
-                    <Image source={require('../images/alikaanbaci.jpg')} style={{ width: 100, height: 100 }} />
+                    
                     <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }} >
                         <Text style={styles.profileNameStyle} >Ufuk Armağan Özgür</Text>
                         <Text></Text>
@@ -36,6 +48,19 @@ class ProfileNonFriends extends Component {
                         <Text></Text>
                         <Text></Text>
                     </View>
+                    <Image source={require('../images/alikaanbaci.jpg')} style={{ width: 100, height: 100 }} />
+                </View>
+                <View style={styles.subContainerStyle}>
+                        <TouchableOpacity
+                          style={{ backgroundColor:'cyan' , justifyContent:'center'}} 
+                          onPress={() => console.log('HAKKINDAya basıldı')}> 
+                          <Text style={{ flex:2 }}>HAKKINDA</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                          style={{ backgroundColor:'#4af083' , justifyContent:'center' }} 
+                          onPress={() => this.goPosts()}> 
+                          <Text style={{ flex:2 }}>POSTLAR</Text>
+                        </TouchableOpacity>
                 </View>
                 <View>
                         <Text></Text>

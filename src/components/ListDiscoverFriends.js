@@ -23,10 +23,8 @@ class ListDiscoverFriends extends Component {
         this.dataSource = ds.cloneWithRows(nonFriendsArray);
     }
 
-     renderRow(name) {
-         console.log("KULLANACAGIM RENDER ROW:");
-         console.log(name);
-        return <ListItemDiscoverFriends name={name} />;
+     renderRow(name, uid) {
+        return <ListItemDiscoverFriends name={ name } uid={uid} />;
     }
 
     render() {
@@ -42,6 +40,7 @@ class ListDiscoverFriends extends Component {
                 
             </View>
         );
+        
         /*return (
             <View style={styles.container}>
                <View style={styles.navBar}>
@@ -53,7 +52,7 @@ class ListDiscoverFriends extends Component {
 }
 
 const mapStateToProps = ({ nonFriendsResponse }) => { 
-    const nonFriendsArray = _.map(nonFriendsResponse, ({ name }, uid) => {
+    const nonFriendsArray = _.map(nonFriendsResponse, ({ name }, uid ) => {
         return { name, uid };
     });
     console.log("burasi ListDiscoverFriendsin mapstatetopropsu : ");

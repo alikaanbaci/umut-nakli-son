@@ -68,7 +68,7 @@ class ProfileFriends extends Component {
                 </View>
                 <Text></Text>
                 <View style={{ alignContent:'center' }}>
-                    <Text style={{ fontsize:60,  color:'blue' }} > KANSER SERÜVENİM </Text>
+                    <Text style={{ fontSize:60,  color:'blue' }} > KANSER SERÜVENİM </Text>
                     <Text style={{ fontWeight:'bold', fontStyle:'italic' }}>
                     9 Aralık Cumartesi saat 19:51 (Bu yazıyı yazmaya başladığım tarih ve şuan 2018deyiz, uzun zamandır yazmadığımı söylemiştim bir yazıya başlayınca bile verdiğim aranın uzunluğuna siz bakın 😅. Hastalığımı öğrendiğim tarih 1 Şubat)
 

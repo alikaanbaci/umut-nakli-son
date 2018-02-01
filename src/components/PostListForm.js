@@ -25,8 +25,8 @@ class PostListForm extends Component {
         this.dataSource = ds.cloneWithRows(postArray);
     }
 
-     renderRow(post) {
-        return <ListItem post={post} />;
+     renderRow(post,id) {
+        return <ListItem post={post} id={id}/>;
     }
 
     render() {

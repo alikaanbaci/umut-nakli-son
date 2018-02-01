@@ -6,11 +6,15 @@ import { CardSection } from '../ortak';
 class ListItem extends Component {
 
     /*onPostClick() {
-        Actions.post_create({ clickedPost: this.props.post });
+        Actions.post_detay({ clickedPost: this.props.post });
     }*/
 
     render() {
         const { prPost } = this.props.post;
+        console.log("List itema gelen post propsu boyle gorunuyor");
+        console.log(this.props.post);
+        console.log(this.props.post.uid);
+        console.log(this.props.post.prPost);
         return (
             //<TouchableWithoutFeedback onPress={this.onPostClick.bind(this)}>
                 <View style={{ borderColor: '#ddd',borderWidth: 2,borderRadius: 30, }} >
@@ -18,6 +22,8 @@ class ListItem extends Component {
                     <CardSection>
                         <Image source={require('../images/alikaanbaci.jpg')} style={{borderRadius:30, flex:1, /*width: 70,*/ height: 70 }} />
                         <Text style={styles.postStyle} > {prPost} </Text>
+                        <Button onPress={() => Actions.post_detay({ clickedPost: this.props.post })} 
+                                title="GÖNDERİYİ GÖR" /> 
                     </CardSection>
                 </View>
             //</TouchableWithoutFeedback>
