@@ -21,6 +21,7 @@ export const REQUEST_FAILED = 'request_failed';
 
 //Arkadaslik istekleri reducer type'ları
 export const FRIENDSHIP_REQUEST_LOAD = 'friendship_request_load';
+export const INCOMING_REQUEST_LOAD = 'incoming_request_load';
 
 export const USER_LOGIN = 'user_login';
 export const LOGIN_SUCCESS = 'login_success';
@@ -33,6 +34,7 @@ export const REGISTER_FAIL = 'register_fail';
 export const POST_CHANGED = 'post_changed';
 export const POST_CREATE = 'post_create';
 export const POST_LOAD = 'post_load';
+export const OTHER_POST_LOAD = 'other_post_load';
 
 export const NONFRIENDS_LOAD = 'nonfriends_load';
 

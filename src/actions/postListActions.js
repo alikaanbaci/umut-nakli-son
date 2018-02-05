@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
-import { POST_CHANGED, POST_CREATE, POST_LOAD } from './types';
+import { POST_CHANGED, POST_CREATE, POST_LOAD, OTHER_POST_LOAD } from './types';
 
 export const actPostChanged = ({ stPost }) => {
     console.log('actPostChanged metodu calıştı.----' + stPost);
@@ -12,10 +12,26 @@ export const actPostChanged = ({ stPost }) => {
     };
 };
 
-export const actPostCreate = ({ prPost }) => {
+export const actPostCreate = ( { prPost } ) => {
     console.log('actPostCreate metodu calıştı.');
-    console.log({prPost });
+    console.log( { prPost } );
     const { currentUser } = firebase.auth();
+    console.log("current user");
+    console.log(currentUser.uid);
+
+      //push fonksiyonu ikinci parametre almadığı için önce push ettiğimiz postun referansı alınıyor.
+      const ref = firebase.database().ref('/postlar').push();
+      console.log(ref.key);
+      
+      //ardndan bu referansın id'si kullanılarak o nodeun altına post ile ilgili bilgiler giriliyor.
+      //aslında push ile bir prPost eklemiştik ama override oldu o. yani push(prPost) iken de üzerine 
+      //yazdı sıkıntı olmadı. ama yine de ne olur ne olmaz pushun içini boş bırakalım.
+      firebase.database().ref('postlar/' + ref.key).set({
+        owner: currentUser.uid,
+        post: prPost 
+      });
+
+
     return (dispatch) => {
         firebase.database().ref(`/kullanicilar/${currentUser.uid}/postlar`)
             .push({ prPost })
@@ -23,7 +39,7 @@ export const actPostCreate = ({ prPost }) => {
                     dispatch({ type: POST_CREATE });
                     Actions.pop();
                 });
-    };
+    }
 };
 
 /*export const actTextInputPress = ({ stPressed }) => {
@@ -36,12 +52,13 @@ export const actPostCreate = ({ prPost }) => {
      };
 };*/
 
-export const actPostLoad = () => {
-    console.log('actPostLoad metodu çalıştı');
+export const actPostLoad = ({ user }) => {
+    console.log('actPostLoad metodu çalıştı, gelen user');
+    console.log(user);
     const { currentUser } = firebase.auth();
     console.log('firebase.auth sonucu :' + currentUser);
     return (dispatch) => {
-        firebase.database().ref(`/kullanicilar/${currentUser.uid}/postlar`)
+        firebase.database().ref('/kullanicilar/'+ user.uid +'/postlar')
             .on('value', snapshot => {
                 if (snapshot.val() === null)
                 {
@@ -52,5 +69,22 @@ export const actPostLoad = () => {
                 }
                
             });
+    };
+};
+
+export const actOtherPostsLoad = () => {
+    console.log('actOtherPostLoad metodu çalıştı');
+    return (dispatch) => {
+       firebase.database().ref('postlar')
+       .on('value', snapshot => {
+           if(snapshot.val() === null)
+           {
+            dispatch({ type: OTHER_POST_LOAD, payload: {} });
+           }
+           else {
+            dispatch({ type: OTHER_POST_LOAD, payload: snapshot.val() });
+           }
+
+       }); 
     };
 };

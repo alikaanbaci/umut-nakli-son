@@ -20,6 +20,8 @@ export const actFriendshipRequestLoad = () => {
                 else {
                     snapshot.forEach((childSnapshot) => {
                         const gelenuser = childSnapshot.val();
+                        console.log("FRIENDSHIP REQUEST action :");
+                        console.log(snapshot.val());
                         dispatch({ type: FRIENDSHIP_REQUEST_LOAD, payload: snapshot.val() });
                     });
                 }

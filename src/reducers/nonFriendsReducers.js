@@ -1,6 +1,6 @@
 import { NONFRIENDS_LOAD,
     REQUEST_SUCCESS,
-    REQUEST_FAILED, } from '../actions/types';
+    REQUEST_FAILED } from '../actions/types';
 
 const INITIAL_STATE = {
 name: '',

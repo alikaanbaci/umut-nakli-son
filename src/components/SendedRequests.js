@@ -34,6 +34,9 @@ class SendedRequests extends Component {
     goSendedRequest() {
         Actions.sendedrequests();
     }
+    goIncomingRequest() {
+        Actions.incomingrequests();
+    }
     render() {
         console.log('nonfriendslist form render oldu');
         console.log(this.props.friendshipRequestArray);
@@ -53,7 +56,7 @@ class SendedRequests extends Component {
                         </TouchableOpacity>
                         <TouchableOpacity 
                           style={{ backgroundColor:'purple' , justifyContent:'center', padding: 5 }} 
-                          onPress={() => this.goPosts()}> 
+                          onPress={() => this.goIncomingRequest()}> 
                           <Text style={{padding: 5}} > GELENLER </Text>
                         </TouchableOpacity>
                 </View>
@@ -80,7 +83,7 @@ const mapStateToProps = ({ friendshipRequestResponse }) => {
     const friendshipRequestArray = _.map(friendshipRequestResponse, ({ requesterName }, uid ) => {
         return { requesterName, uid };
     });
-    console.log("burasi ListDiscoverFriendsin mapstatetopropsu : ");
+    console.log("burasi ListDiscoverFriendsin mapstatetopropsu *: ");
     console.log(friendshipRequestArray);
     return { friendshipRequestArray };
 };

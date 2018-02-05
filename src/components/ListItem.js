@@ -15,14 +15,17 @@ class ListItem extends Component {
         console.log(this.props.post);
         console.log(this.props.post.uid);
         console.log(this.props.post.prPost);
+        const obj = {
+            uid: this.props.post.uid,
+            post: this.props.post.prPost
+        }
         return (
             //<TouchableWithoutFeedback onPress={this.onPostClick.bind(this)}>
                 <View style={{ borderColor: '#ddd',borderWidth: 2,borderRadius: 30, }} >
-                <Text style={styles.textStyle}> Ali Kaan Baci </Text>
                     <CardSection>
                         <Image source={require('../images/alikaanbaci.jpg')} style={{borderRadius:30, flex:1, /*width: 70,*/ height: 70 }} />
                         <Text style={styles.postStyle} > {prPost} </Text>
-                        <Button onPress={() => Actions.post_detay({ clickedPost: this.props.post })} 
+                        <Button onPress={() => Actions.post_detay({ clickedPost: obj })} 
                                 title="GÖNDERİYİ GÖR" /> 
                     </CardSection>
                 </View>

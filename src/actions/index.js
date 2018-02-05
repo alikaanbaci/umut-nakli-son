@@ -7,3 +7,5 @@ export * from './RegisterActions';
 export * from './nonFriendsActions';
 
 export * from './friendshipRequestActions';
+
+export * from './incomingRequestsActions';

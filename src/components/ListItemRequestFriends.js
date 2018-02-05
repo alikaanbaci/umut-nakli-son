@@ -29,7 +29,7 @@ class ListItemRequestFriends extends Component {
                 <View>
                 <Text style={styles.headerStyle}> { requesterName } </Text>
                     <View style={styles.subContainerStyle} >
-                        <Image source={require('../images/alikaanbaci.jpg')} style={{ borderRadius:30,width: 70, height: 70 }} />
+                        <Image source={require('../images/alikaanbaci.jpg')} style={{ borderRadius: 30, width: 70, height: 70 }} />
                         <Image source={require('../icons/winner.png')} style={{ width: 50, height: 50 }} />
                         <View style={styles.textContainerStyle}>
                         <Text style={styles.textStyle}>Kanser Türü:Lenfoma</Text>

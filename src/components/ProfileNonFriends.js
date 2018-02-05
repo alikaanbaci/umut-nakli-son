@@ -6,6 +6,8 @@ import { actPostLoad } from '../actions';
 import ListItem from './ListItem';
 import { CardSection,Button } from '../ortak/index';
 import PostListForm from './PostListForm';
+import ContentNonFriend from './ContentNonFriend';
+
 import { Actions } from 'react-native-router-flux';
  
 class ProfileNonFriends extends Component {
@@ -23,23 +25,37 @@ class ProfileNonFriends extends Component {
       goPosts() {
           this.setState({ postlarigetir:'evet' });
           console.log('Userin postları yuklendi');
-          this.loadPosts();
       }
 
-      loadPosts(){
-          console.log('loadPosts() fonksiyonu calisti');
+      goAbout() {
+        this.setState({ postlarigetir:'hayir' });
+        console.log('Userin hakkindasi yuklendi');
+      }
+
+      renderRow(){
+        console.log('Profile Nonfreindeseki renderRow fonksiyonu calisti');
+        if (this.state.postlarigetir === 'hayir') {
+            //return <Text> Hakkinda sayfasi </Text>;
+            return <ContentNonFriend />;
+        }                
+        if (this.state.postlarigetir === 'evet') {
+            //return <Text> Postlar sayfasi </Text>;
+            return <PostListForm user={this.props.propuser} />;
+        }
       }
 
 
     render() {
-        console.log('post list form render oldu');
-        console.log(this.props.postArray);
+        console.log("ProfileNonFriendse gelen user propsu:");
+        //const { name } = this.props.propuser;
+        //console.log(name);
+        console.log(this.props.propuser);
         return (
             <ScrollView style={styles.container}>
                 <View style={styles.subContainerStyle} >
                     
                     <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }} >
-                        <Text style={styles.profileNameStyle} >Ufuk Armağan Özgür</Text>
+                        <Text style={styles.profileNameStyle} > {this.props.propuser.name} </Text>
                         <Text></Text>
                         <Button onPress={() => this.setState({ durum:'İSTEK GÖNDERİLDİ' })}> {this.state.durum} </Button>
                         <Text></Text>
@@ -53,7 +69,7 @@ class ProfileNonFriends extends Component {
                 <View style={styles.subContainerStyle}>
                         <TouchableOpacity
                           style={{ backgroundColor:'cyan' , justifyContent:'center'}} 
-                          onPress={() => console.log('HAKKINDAya basıldı')}> 
+                          onPress={() => this.goAbout()}> 
                           <Text style={{ flex:2 }}>HAKKINDA</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
@@ -63,15 +79,7 @@ class ProfileNonFriends extends Component {
                         </TouchableOpacity>
                 </View>
                 <View>
-                        <Text></Text>
-                        <Text style={{ fontSize:20 }}> Kanser Türü: Lenfoma</Text>
-                        <Text></Text>
-                        <Text style={{ fontSize:20 }}> Yaş: 25 </Text>
-                        <Text></Text>
-                        <Text style={{ fontSize:20 }}> Şehir: Ankara </Text>
-                        <Text></Text>
-                        <Text></Text>
-                        <Text style={{ fontSize:20, color:'blue', fontStyle:'italic'  }}> Kişinin fotoğraflarını görmek, hikayesini okumak ve onunla konuşmak için bağlantı kurmanız gerekmektedir </Text>
+                        {this.renderRow()}
                 </View>
                
             </ScrollView>

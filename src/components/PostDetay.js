@@ -11,8 +11,6 @@ class PostDetay extends Component {
         this.props.actPostCreate({ prPost });
     }*/
     render() {
-        
-        const { prPost } = this.props.clickedPost;
         console.log('postdetay sayfasına gelen props---');
         console.log(this.props.clickedPost);
         //console.log({prPost});
@@ -22,7 +20,7 @@ class PostDetay extends Component {
         return (
             //<Text>CreatePostForm</Text>
             <View style={styles.container}>
-                    <Text style={{ fontSize:20, color: 'blue' }}> {this.props.clickedPost.prPost} </Text>
+                    <Text style={{ fontSize:20, color: 'blue' }}> {this.props.clickedPost.post} </Text>
             </View>
         );
     }

@@ -24,8 +24,8 @@ class RecentTalkList extends Component {
         this.dataSource = ds.cloneWithRows(postArray);
     }
 
-     renderRow(post) {
-        return <ListItemRecentTalk post={post} />;
+     renderRow(any) {
+        return <ListItemRecentTalk post={any} />;
     }
 
     render() {

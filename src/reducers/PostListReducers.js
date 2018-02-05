@@ -1,4 +1,4 @@
-import { POST_CHANGED, POST_CREATE, POST_LOAD } from '../actions/types';
+import { POST_CHANGED, POST_CREATE, POST_LOAD, OTHER_POST_LOAD } from '../actions/types';
 
 const INITIAL_STATE = {
     post: '',
@@ -19,6 +19,8 @@ export default (state = INITIAL_STATE, action) => {
         case POST_LOAD:
             console.log('postListReducer çalıştı.');
             console.log(action.payload);
+            return action.payload;
+        case OTHER_POST_LOAD:
             return action.payload;
         default:
             return state;

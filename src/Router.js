@@ -17,6 +17,8 @@ import RegisterDisaseInfoForm from './components/RegisterDisaseInfoForm';
 import RegisterAccountInfoForm from './components/RegisterAccountInfoForm';
 import PostDetay from './components/PostDetay';
 import SendedRequests from './components/SendedRequests';
+import IncomingRequests from './components/IncomingRequests';
+import OtherPostsList from './components/OtherPostsList';
 
 
 const HomeIcon = ()=> {
@@ -142,7 +144,7 @@ class RouterComponent extends Component {
                         onLeft={() => console.log("zuhauhua")}
                         renderLeftButton={() =>
                          <Image source={require('./images/logomuz2.png')} style={{ width: 40, height: 35 }} />}
-                        component={PostListForm} 
+                         component={OtherPostsList} 
                         title="Ana Sayfa"
                         titleStyle={{color:'black',fontSize: 17,
                              textShadowColor:'dimgray', textShadowOffset:{width:1,height:1}}}
@@ -213,7 +215,7 @@ class RouterComponent extends Component {
                             <Scene
                                 onLeft={() => console.log('Geriye basti')}
                                 renderLeftButton={() =>
-                                <TouchableOpacity onPress={()=> Actions.mosu_friends() }>
+                                <TouchableOpacity onPress={()=> Actions.mosu_friends()}>
                                 <Image source={require('./icons/back.png')} style={{ width: 40, height: 35 }} />
                                 </TouchableOpacity>}   
                                 key="profilenonfriend" 
@@ -226,13 +228,26 @@ class RouterComponent extends Component {
                               <Scene
                                 onLeft={() => console.log('Geriye basti')}
                                 renderLeftButton={() =>
-                                <TouchableOpacity onPress={()=> Actions.mosu_friends() }>
+                                <TouchableOpacity onPress={()=> Actions.mosu_friends()}>
                                 <Image source={require('./icons/back.png')} style={{ width: 40, height: 35 }} />
                                 </TouchableOpacity>}   
                                 key="sendedrequests" 
                                 component={SendedRequests} 
                                 navigationBarStyle={{ backgroundColor: '#e0ebeb', shadowOpacity:20 }}
                                 title="Gönderilen istekler"
+                                titleStyle={{color:'black',fontSize: 17,
+                                textShadowColor:'dimgray', textShadowOffset:{width:1,height:1}}}
+                             />
+                             <Scene
+                                onLeft={() => console.log('Geriye basti')}
+                                renderLeftButton={() =>
+                                <TouchableOpacity onPress={()=> Actions.mosu_friends()}>
+                                <Image source={require('./icons/back.png')} style={{ width: 40, height: 35 }} />
+                                </TouchableOpacity>}   
+                                key="incomingrequests" 
+                                component={IncomingRequests} 
+                                navigationBarStyle={{ backgroundColor: '#e0ebeb', shadowOpacity:20 }}
+                                title="Gelen istekler"
                                 titleStyle={{color:'black',fontSize: 17,
                                 textShadowColor:'dimgray', textShadowOffset:{width:1,height:1}}}
                              />

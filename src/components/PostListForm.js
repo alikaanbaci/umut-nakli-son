@@ -10,7 +10,8 @@ class PostListForm extends Component {
 
     componentWillMount() {
         console.log('componentWillMount calisti');
-        this.props.actPostLoad();
+        //this.props.actPostLoad();
+        this.props.actPostLoad({ user: this.props.user });
         this.createDataSource(this.props);
     }
 
@@ -23,18 +24,27 @@ class PostListForm extends Component {
             rowHasChanged: (r1, r2) => r1 !== r2
         });
         this.dataSource = ds.cloneWithRows(postArray);
+        console.log("create data soruce burası");
+        console.log(postArray);
+       //console.log(this.props.user); burda çalışıyor.
+        
     }
 
-     renderRow(post,id) {
-        return <ListItem post={post} id={id}/>;
+     renderRow(post) {
+         console.log("burası renderRowdaki post");
+         console.log(post);
+         //console.log(this.props);
+        return <ListItem post={post} />;
     }
 
     render() {
         console.log('post list form render oldu');
         console.log(this.props.postArray);
+        const userim = this.props.user;
+        console.log(this.props.user);
         return (
             <View style={styles.container}>
-            <CreatePostForm />
+
                 <ListView
                     enableEmptySections
                     dataSource={this.dataSource}
@@ -54,6 +64,9 @@ class PostListForm extends Component {
 }
 
 const mapStateToProps = ({ postListResponse }) => { 
+    //const userim = this.props.user;
+    //console.log("mapstatetopeopstaki user");
+    //console.log(userim);
     const postArray = _.map(postListResponse, ({ prPost }, uid) => {
         return { prPost, uid };
     });

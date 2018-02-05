@@ -9,9 +9,11 @@ import ProfileNonFriends from './ProfileNonFriends';
 
 class ListItemDiscoverFriends extends Component {
 
-    goProfile() {
-        Actions.profilenonfriend();
-    }
+    /*goProfile(user) {
+        console.log("goProfila gelen user");
+        console.log(user);
+        Actions.profilenonfriend(propuser="{user}");
+    }*/
 
     sendFriendshipRequest(uid, name) {
         this.props.actSendFriendshipRequest(uid, name);
@@ -21,6 +23,7 @@ class ListItemDiscoverFriends extends Component {
         const { name, uid } = this.props.name;
         //const { name } = this.props;
         console.log('ListItemDiscoverFriends e gelen veri-->');
+        console.log(this.props.name);
         console.log(name);
         console.log(uid);
         return (
@@ -37,7 +40,7 @@ class ListItemDiscoverFriends extends Component {
                         <Text style={styles.textStyle}>Yaş: 25</Text>
                         <Text style={styles.textStyle}>Şehir: Ankara</Text>
                         </View>
-                        <TouchableOpacity onPress={() => this.goProfile()} style={styles.buttonStyle}>
+                        <TouchableOpacity onPress={() => Actions.profilenonfriend({ propuser: this.props.name })} style={styles.buttonStyle}>
                             <Image source={require('../icons/ekle.jpg')} style={{ alignSelf: 'center', width: 30, height: 30 }} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.sendFriendshipRequest(uid, name)} style={styles.buttonStyle}>
