@@ -19,6 +19,8 @@ import PostDetay from './components/PostDetay';
 import SendedRequests from './components/SendedRequests';
 import IncomingRequests from './components/IncomingRequests';
 import OtherPostsList from './components/OtherPostsList';
+import Chat from './components/Chat';
+import ListChat from './components/ListChat';
 
 
 const HomeIcon = ()=> {
@@ -168,7 +170,7 @@ class RouterComponent extends Component {
 
                        <Scene 
                             key="recent_talking_form" 
-                            component={RecentTalkList} 
+                            component={ListChat} 
                             navigationBarStyle={{ backgroundColor: '#e0ebeb' }}
                             title="Son Konuşulanlar"
                             titleStyle={{color:'black',fontSize: 17,
@@ -176,12 +178,13 @@ class RouterComponent extends Component {
                         />
 
                         <Scene 
-                            key="message_form" 
-                            component={MessageForm} 
+                            key="chat" 
+                            component={Chat} 
                             navigationBarStyle={{ backgroundColor: '#e0ebeb' }}
                             title="Mesajlarım"
                             titleStyle={{color:'black',fontSize: 17,
-                             textShadowColor:'dimgray', textShadowOffset:{width:1,height:1}}} 
+                             textShadowColor:'dimgray', textShadowOffset:{width:1,height:1}}}
+                             hideTabBar = 'true' 
                         />
                     </Scene>
 

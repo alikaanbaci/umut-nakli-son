@@ -9,6 +9,7 @@ import ListItemDiscoverFriends from './ListItemDiscoverFriends';
 class ListDiscoverFriends extends Component {
 
     componentWillMount() {
+        console.log("LIST DISCOVER FRIENDS componentWillMountCalisti");
         this.props.actNonFriendsLoad();
         this.createDataSource(this.props);
     }
@@ -25,7 +26,7 @@ class ListDiscoverFriends extends Component {
     }
 
     renderRow(name, uid) {
-       return <ListItemDiscoverFriends name={ name } uid={uid} />;
+       return <ListItemDiscoverFriends name={ name } uid={uid} disaseInfo={name.disaseInfo} />;
     }
     goSendedRequest() {
       Actions.sendedrequests();
@@ -75,8 +76,8 @@ class ListDiscoverFriends extends Component {
 }
 
 const mapStateToProps = ({ nonFriendsResponse }) => { 
-    const nonFriendsArray = _.map(nonFriendsResponse, ({ name }, uid ) => {
-        return { name, uid };
+    const nonFriendsArray = _.map(nonFriendsResponse, ({ name, age, disaseInfo, province }, uid ) => {
+        return { name, age, uid, disaseInfo, province };
     });
     console.log("burasi ListDiscoverFriendsin mapstatetopropsu** : ");
     console.log(nonFriendsArray);

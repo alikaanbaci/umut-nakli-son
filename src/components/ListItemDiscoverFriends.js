@@ -20,7 +20,13 @@ class ListItemDiscoverFriends extends Component {
     }
 
     render() {
-        const { name, uid } = this.props.name;
+        const { name, uid, province, age } = this.props.name;
+        let disase;
+        if (this.props.disaseInfo === undefined){
+             disase = {};
+        } else {
+             disase = this.props.disaseInfo;
+        }
         //const { name } = this.props;
         console.log('ListItemDiscoverFriends e gelen veri-->');
         console.log(this.props.name);
@@ -35,12 +41,12 @@ class ListItemDiscoverFriends extends Component {
                         <Image source={require('../images/alikaanbaci.jpg')} style={{ borderRadius:30,width: 70, height: 70 }} />
                         <Image source={require('../icons/winner.png')} style={{ width: 50, height: 50 }} />
                         <View style={styles.textContainerStyle}>
-                        <Text style={styles.textStyle}>Kanser Türü:Lenfoma</Text>
-                        <Text style={styles.textStyle}>Evre:3A</Text>
-                        <Text style={styles.textStyle}>Yaş: 25</Text>
-                        <Text style={styles.textStyle}>Şehir: Ankara</Text>
+                        <Text style={styles.textStyle}>Kanser Türü:{disase.disaseType}</Text>
+                        <Text style={styles.textStyle}>Evre:{disase.disaseStage}</Text>
+                        <Text style={styles.textStyle}>Yaş: {age}</Text>
+                        <Text style={styles.textStyle}>Şehir: {province}</Text>
                         </View>
-                        <TouchableOpacity onPress={() => Actions.profilenonfriend({ propuser: this.props.name })} style={styles.buttonStyle}>
+                        <TouchableOpacity onPress={() => Actions.profilenonfriend({ propuser: this.props.name, userDisase: disase })} style={styles.buttonStyle}>
                             <Image source={require('../icons/ekle.jpg')} style={{ alignSelf: 'center', width: 30, height: 30 }} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.sendFriendshipRequest(uid, name)} style={styles.buttonStyle}>

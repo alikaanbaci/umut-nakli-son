@@ -28,8 +28,10 @@ class SendedRequests extends Component {
         this.dataSource = ds.cloneWithRows(friendshipRequestArray);
     }
 
-    renderRow(requesterName, uid) {
-        return <ListItemRequestFriends requester={requesterName} uid={uid} />;
+    renderRow(requested) {
+        console.log("ListItemRequestFriends ten oncesi");
+        console.log(requested);
+        return <ListItemRequestFriends requester={requested} />;
     }
     goSendedRequest() {
         Actions.sendedrequests();
@@ -38,7 +40,7 @@ class SendedRequests extends Component {
         Actions.incomingrequests();
     }
     render() {
-        console.log('nonfriendslist form render oldu');
+        console.log('SendedRequest form render oldu');
         console.log(this.props.friendshipRequestArray);
         return (
             
@@ -80,9 +82,10 @@ class SendedRequests extends Component {
 }
 
 const mapStateToProps = ({ friendshipRequestResponse }) => { 
-    const friendshipRequestArray = _.map(friendshipRequestResponse, ({ requesterName }, uid ) => {
-        return { requesterName, uid };
-    });
+    /*const friendshipRequestArray = _.map(friendshipRequestResponse, ({ requesterName, age }, uid ) => {
+        return { requesterName, uid, age };
+    });*/
+    const friendshipRequestArray = friendshipRequestResponse;
     console.log("burasi ListDiscoverFriendsin mapstatetopropsu *: ");
     console.log(friendshipRequestArray);
     return { friendshipRequestArray };

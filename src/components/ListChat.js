@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { View, Text, ListView, StyleSheet, Image } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { actFriendsLoad } from '../actions';
-import ListItemFriends from './ListItemFriends';
+import { actChatFriendsLoad } from '../actions';
+import ListItemChat from './ListItemChat';
  
-class ListFriends extends Component {
+class ListChat extends Component {
 
     componentWillMount() {
         console.log('FRIENDS componentWillMount calisti');
-        this.props.actFriendsLoad();
+        this.props.actChatFriendsLoad();
         this.createDataSource(this.props);
     }
 
@@ -27,7 +27,7 @@ class ListFriends extends Component {
      renderRow(name) {
         console.log("list item friends'den oncesi");
         console.log(name);
-        return <ListItemFriends friend={name} />;
+        return <ListItemChat friend={name} />;
     }
 
     render() {
@@ -52,12 +52,12 @@ class ListFriends extends Component {
     }
 }
 
-const mapStateToProps = ({ friendsResponse }) => { 
+const mapStateToProps = ({ chatFriendsResponse }) => { 
     /*const postArray = _.map(friendsResponse, ({ prPost }, uid) => {
         return { prPost, uid };
     });*/
     console.log("FRIENDS MAPSTATETOPROS CALISTI.");
-    const friendsArray = friendsResponse;
+    const friendsArray = chatFriendsResponse;
     console.log(friendsArray);
     return { friendsArray };
 };
@@ -82,4 +82,4 @@ const styles = StyleSheet.create(
     }
 );
 
-export default connect(mapStateToProps, { actFriendsLoad })(ListFriends);
+export default connect(mapStateToProps, { actChatFriendsLoad })(ListChat);

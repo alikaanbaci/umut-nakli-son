@@ -10,7 +10,7 @@ import ProfileNonFriends from './ProfileNonFriends';
 class ListItemRequestFriends extends Component {
 
     goProfile() {
-        Actions.profilenonfriend();
+        
     }
 
     sendFriendshipRequest(uid, name) {
@@ -18,26 +18,36 @@ class ListItemRequestFriends extends Component {
     }
 
     render() {
-        const { requesterName, uid } = this.props.requester;
+        //const { requesterName, uid } = this.props.requester;
         //const { name } = this.props;
+        const name = this.props.requester.name;
+        const age = this.props.requester.age;
+        const province = this.props.requester.province;
+        let disase;
+        if (this.props.requester.disase === undefined){
+             disase = {};
+        } else {
+             disase = this.props.requester.disase;
+        }
         console.log('ListItemRequestFriends e gelen veri-->');
-        console.log(requesterName);
-        console.log(uid);
+        console.log(name);
+        console.log(disase);
+        //console.log(uid);
         return (
             //<TouchableWithoutFeedback onPress={this.onPostClick.bind(this)}>
             <TouchableWithoutFeedback onPress={() => console.log("tiklama ulan")}>
                 <View>
-                <Text style={styles.headerStyle}> { requesterName } </Text>
+                <Text style={styles.headerStyle}> { name } </Text>
                     <View style={styles.subContainerStyle} >
                         <Image source={require('../images/alikaanbaci.jpg')} style={{ borderRadius: 30, width: 70, height: 70 }} />
                         <Image source={require('../icons/winner.png')} style={{ width: 50, height: 50 }} />
                         <View style={styles.textContainerStyle}>
-                        <Text style={styles.textStyle}>Kanser Türü:Lenfoma</Text>
-                        <Text style={styles.textStyle}>Evre:3A</Text>
-                        <Text style={styles.textStyle}>Yaş: 25</Text>
-                        <Text style={styles.textStyle}>Şehir: Ankara</Text>
+                        <Text style={styles.textStyle}>Kanser Türü:{disase.disaseType}</Text>
+                        <Text style={styles.textStyle}>Evre:{disase.disaseStage}</Text>
+                        <Text style={styles.textStyle}>Yaş: {age}</Text>
+                        <Text style={styles.textStyle}>Şehir: {province}</Text>
                         </View>
-                        <TouchableOpacity onPress={() => this.goProfile()} style={styles.buttonStyle}>
+                        <TouchableOpacity onPress={() => Actions.profilenonfriend({ propuser: this.props.requester, userDisase: disase })} style={styles.buttonStyle}>
                             <Image source={require('../icons/ekle.jpg')} style={{ alignSelf: 'center', width: 30, height: 30 }} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.sendFriendshipRequest(uid, name)} style={styles.buttonStyle}>

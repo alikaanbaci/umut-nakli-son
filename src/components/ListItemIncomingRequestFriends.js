@@ -10,38 +10,57 @@ import ProfileNonFriends from './ProfileNonFriends';
 class ListItemIncomingRequestFriends extends Component {
 
     goProfile() {
-        Actions.profilenonfriend();
+       
     }
 
     sendFriendshipRequest(uid, name) {
         this.props.actSendFriendshipRequest(uid, name);
     }
 
-    render() {
-        const { requesterName, uid } = this.props.requester;
-        //const { name } = this.props;
-        console.log('ListItemRequestFriends e gelen veri-->');
-        console.log(this.props.requester);
+    addFirends(uid) {
+        console.log("LIST-ITEM-INCOMING-REQUEST : Firebase'e eklenecek olan firends uid'si");
         console.log(uid);
+        const { currentUser } = firebase.auth();
+        console.log("LIST-ITEM-INCOMING-REQUEST : Arkadaslıgı onaylayacak olanın uid'si");
+        console.log(currentUser.uid);
+        const database = firebase.database();
+        database.ref("kullanicilar/" + currentUser.uid + "/friends/" + uid).set({ friendsUid: uid });
+        database.ref("kullanicilar/" + currentUser.uid + "/incomingFriendshipRequest/" + uid).remove();
+        database.ref("kullanicilar/" + uid + "/friends/" + currentUser.uid).set({ friendsUid: currentUser.uid });
+        database.ref("kullanicilar/" + uid + "/friendshipRequest/" + currentUser.uid).remove();
+    }
+
+    render() {
+        const { name, uid, province, age } = this.props.requester;
+        let disase;
+        if (this.props.disaseInfo === undefined){
+             disase = {};
+        } else {
+             disase = this.props.disaseInfo;
+        }
+        //const { name } = this.props;
+        console.log('ListItemIncomingRequestFriends e gelen veri-->');
+        console.log(this.props.requester);
+        console.log(this.props.disaseInfo);
         return (
             //<TouchableWithoutFeedback onPress={this.onPostClick.bind(this)}>
             <TouchableWithoutFeedback onPress={() => console.log("tiklama ulan")}>
                 <View>
-                <Text style={styles.headerStyle}> { this.props.requester.name } </Text>
+                <Text style={styles.headerStyle}> { name } </Text>
                     <View style={styles.subContainerStyle} >
                         <Image source={require('../images/alikaanbaci.jpg')} style={{ borderRadius: 30, width: 70, height: 70 }} />
                         <Image source={require('../icons/winner.png')} style={{ width: 50, height: 50 }} />
                         <View style={styles.textContainerStyle}>
-                        <Text style={styles.textStyle}>Kanser Türü:Lenfoma</Text>
-                        <Text style={styles.textStyle}>Evre:3A</Text>
-                        <Text style={styles.textStyle}>Yaş: 25</Text>
-                        <Text style={styles.textStyle}>Şehir: Ankara</Text>
+                        <Text style={styles.textStyle}>Kanser Türü:{ disase.disaseType }</Text>
+                        <Text style={styles.textStyle}>Evre:{ disase.disaseStage }</Text>
+                        <Text style={styles.textStyle}>Yaş: { age }</Text>
+                        <Text style={styles.textStyle}>Şehir: { province }</Text>
                         </View>
-                        <TouchableOpacity onPress={() => this.goProfile()} style={styles.buttonStyle}>
+                        <TouchableOpacity onPress={() => Actions.profilenonfriend({ propuser: this.props.requester, userDisase: disase })} style={styles.buttonStyle}>
                             <Image source={require('../icons/ekle.jpg')} style={{ alignSelf: 'center', width: 30, height: 30 }} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.sendFriendshipRequest(uid, name)} style={styles.buttonStyle}>
-                            <Image source={require('../icons/star.png')} style={{ alignSelf: 'center', width: 30, height: 30 }} />
+                        <TouchableOpacity onPress={() => this.addFirends(this.props.requester.requesterUid)} style={styles.buttonStyle}>
+                            <Image source={require('../icons/link.png')} style={{ alignSelf: 'center', width: 30, height: 30 }} />
                         </TouchableOpacity>
                     </View>
                 </View>

@@ -9,31 +9,35 @@ class ListItemFriends extends Component {
         Actions.profilefriend();
     }
 
+    /*goChat() {
+        Actions.chat(user=this.props.friend);
+    }*/
+
     render() {
         //const { prPost } = this.props.post;
+        console.log("ListitemFriendsa gelen friend propsu:");
+        console.log(this.props.friend);
         return (
             //<TouchableWithoutFeedback onPress={this.onPostClick.bind(this)}>
             <TouchableWithoutFeedback onPress={() => console.log("tiklama ulan")}>
                 <View>
-                <Text style={styles.headerStyle}> {this.props.friend.name} </Text>
+                
                     <View style={styles.subContainerStyle} >
                         <Image source={require('../images/kanserhastasi1.png')} style={{borderRadius:30, width: 70, height: 70 }} />
                         <Image source={require('../icons/warrior.png')} style={{ width: 50, height: 50 }} />
                         <View style={styles.textContainerStyle}>
-                        <Text style={styles.textStyle}>Kanser Türü:Kemik Kanseri</Text>
-                        <Text style={styles.textStyle}>Evre:2B</Text>
-                        <Text style={styles.textStyle}>Yaş: 21</Text>
-                        <Text style={styles.textStyle}>Şehir: Karabük</Text>
+                       
+                        <Text style={styles.headerStyle}> {this.props.friend.name} </Text>
+
                         </View>
                         <TouchableOpacity 
-                         onPress={() => Actions.chat({ user: this.props.friend })} 
-                         style={styles.buttonStyle}>                     
-                             <Image source={require('../icons/chat.png')} style={{ alignSelf: 'center', width: 30, height: 30 }} />
-                       </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.goProfile2()} style={styles.buttonStyle}>
+                        onPress={() => Actions.chat({ user: this.props.friend })} 
+                        style={styles.buttonStyle}>
                             
-                            <Image source={require('../icons/ekle.jpg')} style={{ alignSelf: 'center', width: 30, height: 30 }} />
+                            <Image source={require('../icons/chat.png')} style={{ alignSelf: 'center', width: 30, height: 30 }} />
                         </TouchableOpacity>
+                        
+
                     </View>
                 </View>
             </TouchableWithoutFeedback>

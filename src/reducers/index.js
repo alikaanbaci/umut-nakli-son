@@ -5,6 +5,9 @@ import registerReducers from './RegisterReducers';
 import nonFriendsReducers from './nonFriendsReducers';
 import friendshipRequestReducers from './friendshipRequestReducers';
 import incomingRequestReducers from './incomingRequestReducers';
+import friendsReducers from './friendsReducers';
+import profileReducers from './profileReducers';
+import chatFriendsReducers from './chatFriendsReducers';
 
 export default combineReducers({
     //kimlikDogrulamaReducerstan return edilen deger neyse kimlikDogrulamaResponsea atılıyor.
@@ -13,5 +16,8 @@ export default combineReducers({
    registerResponse: registerReducers,
    nonFriendsResponse: nonFriendsReducers,
    friendshipRequestResponse: friendshipRequestReducers,
-   incomingRequestResponse: incomingRequestReducers
+   incomingRequestResponse: incomingRequestReducers,
+   friendsResponse: friendsReducers,
+   profileResponse: profileReducers,
+   chatFriendsResponse: chatFriendsReducers
 });

@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { View, Text, ListView, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import { Actions } from 'react-native-router-flux';
 import { actPostLoad } from '../actions';
 import ListItem from './ListItem';
 import { CardSection,Button } from '../ortak/index';
 import PostListForm from './PostListForm';
 import ContentNonFriend from './ContentNonFriend';
 
-import { Actions } from 'react-native-router-flux';
+
  
 class ProfileNonFriends extends Component {
     
@@ -32,11 +33,11 @@ class ProfileNonFriends extends Component {
         console.log('Userin hakkindasi yuklendi');
       }
 
-      renderRow(){
+      renderRow() {
         console.log('Profile Nonfreindeseki renderRow fonksiyonu calisti');
         if (this.state.postlarigetir === 'hayir') {
             //return <Text> Hakkinda sayfasi </Text>;
-            return <ContentNonFriend />;
+            return <ContentNonFriend user={this.props.propuser} userDisase={this.props.userDisase} />;
         }                
         if (this.state.postlarigetir === 'evet') {
             //return <Text> Postlar sayfasi </Text>;
@@ -47,8 +48,15 @@ class ProfileNonFriends extends Component {
 
     render() {
         console.log("ProfileNonFriendse gelen user propsu:");
-        //const { name } = this.props.propuser;
-        //console.log(name);
+        const { name } = this.props.propuser;
+        let disase;
+        if (this.props.userDisase === undefined){
+             disase = {};
+        } else {
+             disase = this.props.userDisase;
+        }
+        console.log(disase);
+        console.log(name);
         console.log(this.props.propuser);
         return (
             <ScrollView style={styles.container}>
@@ -57,7 +65,7 @@ class ProfileNonFriends extends Component {
                     <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }} >
                         <Text style={styles.profileNameStyle} > {this.props.propuser.name} </Text>
                         <Text></Text>
-                        <Button onPress={() => this.setState({ durum:'İSTEK GÖNDERİLDİ' })}> {this.state.durum} </Button>
+                        <Button onPress={() => this.setState({ durum: 'İSTEK GÖNDERİLDİ' })}> {this.state.durum} </Button>
                         <Text></Text>
                         <Text></Text>
                         <Text></Text>

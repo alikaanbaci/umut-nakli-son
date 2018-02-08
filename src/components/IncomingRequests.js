@@ -30,7 +30,8 @@ class IncomingRequests extends Component {
     renderRow(name) {
         console.log("List item discoer friends'den oncesi");
         console.log(name);
-        return <ListItemIncomingRequestFriends requester={name} /*uid={uid}*/ />;
+        console.log(name.disase);
+        return <ListItemIncomingRequestFriends requester={name} disaseInfo={name.disase} /*uid={uid}*/ />;
     }
     goSendedRequest() {
         Actions.sendedrequests();
@@ -83,7 +84,7 @@ const mapStateToProps = ({ incomingRequestResponse }) => {
     /*const incomingRequestArray = _.map(incomingRequestResponse, ({ name }) => {
         return { name };
     });*/
-   const incomingRequestArray = incomingRequestResponse;
+    const incomingRequestArray = incomingRequestResponse;
     console.log("burasi REQUEST mapstatetopropsu : ");
     console.log(incomingRequestResponse);
     return { incomingRequestArray };

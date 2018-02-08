@@ -32,10 +32,15 @@ export const actNonFriendsLoad = () => {
                     dispatch({ type: NONFRIENDS_LOAD, payload: {} });
                 }
                 else {
-                    snapshot.forEach((childSnapshot) => {
-                        const gelenuser = childSnapshot.val();
+                    //snapshot.forEach(() => {
+                        //const gelenuser = childSnapshot.val();
+                        //console.log("childsnapshot");
+                        //console.log(gelenuser);
+                        console.log("snapshot");
+                        console.log(snapshot.val());
+
                         dispatch({ type: NONFRIENDS_LOAD, payload: snapshot.val() });
-                    });
+                    //});
                 }
             });
     };

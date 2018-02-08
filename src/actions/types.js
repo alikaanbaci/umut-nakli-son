@@ -23,6 +23,14 @@ export const REQUEST_FAILED = 'request_failed';
 export const FRIENDSHIP_REQUEST_LOAD = 'friendship_request_load';
 export const INCOMING_REQUEST_LOAD = 'incoming_request_load';
 
+//Ardadaslık ile ilgili reducer type'ları
+export const FRIENDS_LOAD = 'friends_load';
+
+//Profil ile ilgili reducer type'ları
+export const PROFILE_LOAD = 'profile_load';
+
+export const CHAT_FRIENDS_LOAD = "  chat_friends_load";
+
 export const USER_LOGIN = 'user_login';
 export const LOGIN_SUCCESS = 'login_success';
 export const LOGIN_FAIL = 'login_fail';
