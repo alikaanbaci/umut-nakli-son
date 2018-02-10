@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ListView, StyleSheet, Image, TextInput, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
 import _ from 'lodash';
 import { actProfileLoad, actFriendsLoad } from '../actions';
 import ListItem from './ListItem';
@@ -24,9 +25,15 @@ class ProfileForm extends Component {
         console.log("Willl mount calıstı");
         console.log(this.props.profile.name);
         console.log(this.state.stHospital);
+        this.getImages();
     }
-    componentDidMount() {
-        console.log("Willl didmount calıstı");
+    getImages() {
+        const database = firebase.database();
+        const { currentUser } = firebase.auth();
+        database.ref('kullanicilar/' + currentUser.uid + '/resimler').on('value', (snapshot) => {
+            console.log("GET IMAGES methodu");
+            console.log(snapshot.val());
+        });
     }
 
     clicked() {
@@ -97,6 +104,9 @@ class ProfileForm extends Component {
             console.log(this.props.profile.name);
             console.log(this.state.stName);
     }
+    goGallery(){
+        Actions.gallery_form();
+    }
 
     render() {
         console.log('PROFILE FORM render oldu');
@@ -123,6 +133,9 @@ class ProfileForm extends Component {
                 <View style={styles.subContainerStyle} >
                     <Text style={styles.profileStroyStyle} >Ufuk Armağan Özgüraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                     aaaaaaaaaaaaa</Text>
+                </View>
+                <View style={styles.subContainerStyle} >
+                    <Button onPress={() => this.goGallery()}> RESİM YUKLE </Button>
                 </View>
                 <View style={styles.subContainerStyle} >
                     <Text style={styles.profileStroyStyle} >Fotoğraflarım</Text>

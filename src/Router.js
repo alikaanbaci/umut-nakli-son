@@ -21,7 +21,7 @@ import IncomingRequests from './components/IncomingRequests';
 import OtherPostsList from './components/OtherPostsList';
 import Chat from './components/Chat';
 import ListChat from './components/ListChat';
-
+import GalleryForm from './components/GalleryForm';
 
 const HomeIcon = ()=> {
     return (
@@ -200,6 +200,19 @@ class RouterComponent extends Component {
                             titleStyle={{color:'black',fontSize: 17,
                              textShadowColor:'dimgray', textShadowOffset:{width:1,height:1}}} 
                         />
+                        <Scene
+                            navigationBarStyle={{shadowOpacity:10}} 
+                            key="gallery_form" 
+                            component={GalleryForm}
+                            onLeft={() => console.log("zuhauhua")}
+                            renderLeftButton={() =>
+                             <Image source={require('./images/logomuz.jpg')} style={{ width: 40, height: 35 }} />} 
+                            navigationBarStyle={{ backgroundColor: '#e0ebeb' }}
+                            title="Resim Yükle"
+                            titleStyle={{color:'black',fontSize: 17,
+                             textShadowColor:'dimgray', textShadowOffset:{width:1,height:1}}} 
+                        /> 
+                        
                     </Scene>
 
                     <Scene key="mosu_friends" title="SİZE UYGUN KAHRAMANLAR" icon={FriendsIcon}>
