@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableWithoutFeedback, TouchableOpacity, Image, Button, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import Toast from 'react-native-simple-toast';
 import firebase, { database } from 'firebase';
 import { actSendFriendshipRequest } from '../actions';
 import { CardSection } from '../ortak';
@@ -14,9 +15,35 @@ class ListItemDiscoverFriends extends Component {
         console.log(user);
         Actions.profilenonfriend(propuser="{user}");
     }*/
+    constructor(props) {
+        super(props);
+        let disase;
+        if (this.props.disaseInfo === undefined){
+             disase = {};
+        } else {
+             disase = this.props.disaseInfo;
+        }
+        this.state = { durum: disase.profileType };
+        
+    
+        // Toggle the state every second
+        /*setInterval(() => {
+          this.setState({ showText: !this.state.durum });
+        }, 1000);*/
+      }
 
     sendFriendshipRequest(uid, name) {
+        Toast.show('Arkadaslik istegi gonderildi', Toast.SHORT);
         this.props.actSendFriendshipRequest(uid, name);
+    }
+
+    renderImage() {
+        if (this.state.durum === 'savasci') {
+            return <Image source={require('../icons/warrior.png')} style={{ width: 50, height: 50 }} />;
+        }
+        else {
+            return <Image source={require('../icons/winner.png')} style={{ width: 50, height: 50 }} />;
+        }
     }
 
     render() {
@@ -27,19 +54,29 @@ class ListItemDiscoverFriends extends Component {
         } else {
              disase = this.props.disaseInfo;
         }
+        let profile;
+        if (this.props.profile === undefined){
+            profile = {};
+        } else {
+            profile = this.props.profile;
+        }
         //const { name } = this.props;
         console.log('ListItemDiscoverFriends e gelen veri-->');
         console.log(this.props.name);
+        console.log('ListItemDiscoverFriends e gelen disease-->');
+        console.log(disase.profileType);
         console.log(name);
         console.log(uid);
+        console.log("durum state i");
+        console.log(this.state.durum);
         return (
             //<TouchableWithoutFeedback onPress={this.onPostClick.bind(this)}>
             <TouchableWithoutFeedback onPress={() => console.log("tiklama ulan")}>
                 <View>
                 <Text style={styles.headerStyle}> { name } </Text>
                     <View style={styles.subContainerStyle} >
-                        <Image source={require('../images/alikaanbaci.jpg')} style={{ borderRadius:30,width: 70, height: 70 }} />
-                        <Image source={require('../icons/winner.png')} style={{ width: 50, height: 50 }} />
+                        <Image source={{uri: profile.url}} style={{ borderRadius:30,width: 70, height: 70 }} />
+                        {this.renderImage()}
                         <View style={styles.textContainerStyle}>
                         <Text style={styles.textStyle}>Kanser Türü:{disase.disaseType}</Text>
                         <Text style={styles.textStyle}>Evre:{disase.disaseStage}</Text>

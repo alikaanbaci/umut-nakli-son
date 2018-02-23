@@ -6,18 +6,22 @@ import { actChatFriendsLoad } from '../actions';
 import ListItemChat from './ListItemChat';
  
 class ListChat extends Component {
+    state = { render: '' }
 
     componentWillMount() {
-        console.log('FRIENDS componentWillMount calisti');
+        console.log('ListChat componentWillMount calisti');
         this.props.actChatFriendsLoad();
         this.createDataSource(this.props);
     }
 
     componentWillReceiveProps(friendsArray) {
+        console.log('ListChat componentWillReceiveProps calisti');
         this.createDataSource(friendsArray);
+        this.setState({ render: 'asd' });
     }
 
-    createDataSource({ friendsArray }) {   
+    createDataSource({ friendsArray }) { 
+        console.log('ListChat createDataSource calisti');  
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
@@ -25,14 +29,17 @@ class ListChat extends Component {
     }
 
      renderRow(name) {
+        console.log('ListChat renderRow calisti');  
         console.log("list item friends'den oncesi");
         console.log(name);
-        return <ListItemChat friend={name} />;
+        return <ListItemChat friend={name} disaseInfo={name.disase} />;
     }
 
     render() {
         //console.log('post list form render oldu');
         //console.log(this.props.postArray);
+        
+
         return (
             <View style={styles.container}>
                 <ListView
@@ -56,7 +63,7 @@ const mapStateToProps = ({ chatFriendsResponse }) => {
     /*const postArray = _.map(friendsResponse, ({ prPost }, uid) => {
         return { prPost, uid };
     });*/
-    console.log("FRIENDS MAPSTATETOPROS CALISTI.");
+    console.log("ListChat MAPSTATETOPROS CALISTI.FriendsArray : ");
     const friendsArray = chatFriendsResponse;
     console.log(friendsArray);
     return { friendsArray };

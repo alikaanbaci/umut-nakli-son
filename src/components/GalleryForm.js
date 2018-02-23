@@ -18,7 +18,7 @@ class GalleryForm extends Component {
     getSelectedImages = (selectedImages, currentImage) => {
         this.setState({ stSelectedImage: currentImage.uri });
       }
-      selected() {
+      selectedForNormal() {
         console.log(this.state.stSelectedImage);
         const image = this.state.stSelectedImage;  
         const Blob = RNFetchBlob.polyfill.Blob;
@@ -55,11 +55,47 @@ class GalleryForm extends Component {
             });
         });
       }
+      selectedForProfile() {
+        console.log(this.state.stSelectedImage);
+        const image = this.state.stSelectedImage;  
+        const Blob = RNFetchBlob.polyfill.Blob;
+        const fs = RNFetchBlob.fs;
+        window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+        window.Blob = Blob;
+            console.log("birinci");
+            //console.log(uuid);
+            let uploadBlob = null;
+            const { currentUser } = firebase.auth();
+            const imageRef = firebase.storage().ref('user/' + currentUser.uid + '/profile').child('profile.jpg');
+            let mime = 'image/jpg';
+            fs.readFile(image, 'base64')
+            .then((data) => {
+                return Blob.build(data, { type: `${mime};BASE64` });
+            })
+            .then((blob) => {
+                uploadBlob = blob;
+                return imageRef.put(blob, { contentType: mime });
+            })
+            .then(() => {
+                uploadBlob.close();
+                return imageRef.getDownloadURL();
+            })
+            .then((url) => {
+            firebase.database().ref("kullanicilar/" + currentUser.uid + "/profile").set({
+                url: url
+            });
+                console.log(url);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+      }
       render() {
         return (
         <View style={styles.container}>
             <CameraRollPicker callback={this.getSelectedImages} />
-            <Button onPress={() => this.selected(this.callback)} > Resmi Kaydet </Button>
+            <Button onPress={() => this.selectedForNormal(this.callback)} > Resmi Yükle </Button>
+            <Button onPress={() => this.selectedForProfile(this.callback)} > Profil Resmi Yükle </Button>
         </View>
         );
       }

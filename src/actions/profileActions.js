@@ -10,7 +10,7 @@ export const actProfileLoad = () => {
     //console.log(uid);
     return (dispatch) => {
         database.ref("kullanicilar/" + currentUser.uid)
-        .once("value", (snapshot) => {
+        .on("value", (snapshot) => {
             console.log("gelen user profile");
             console.log(snapshot.val());
             dispatch({ type: PROFILE_LOAD, payload: snapshot.val() });

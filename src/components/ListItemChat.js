@@ -5,6 +5,15 @@ import { CardSection } from '../ortak';
 
 class ListItemFriends extends Component {
 
+    renderImage() {
+        if (this.props.friend.disase === 'savasci') {
+            return <Image source={require('../icons/warrior.png')} style={{ width: 50, height: 50 }} />;
+        }
+        else {
+            return <Image source={require('../icons/winner.png')} style={{ width: 50, height: 50 }} />
+        }
+    }
+
     goProfile2() {
         Actions.profilefriend();
     }
@@ -23,8 +32,8 @@ class ListItemFriends extends Component {
                 <View>
                 
                     <View style={styles.subContainerStyle} >
-                        <Image source={require('../images/kanserhastasi1.png')} style={{borderRadius:30, width: 70, height: 70 }} />
-                        <Image source={require('../icons/warrior.png')} style={{ width: 50, height: 50 }} />
+                        <Image source={{uri: this.props.friend.url}} style={{borderRadius:30, width: 70, height: 70 }} />
+                        {this.renderImage()}
                         <View style={styles.textContainerStyle}>
                        
                         <Text style={styles.headerStyle}> {this.props.friend.name} </Text>

@@ -27,6 +27,7 @@ export const actIncomingRequestLoad = () => {
                         element.province = snapshot2.val().province;
                         element.age = snapshot2.val().age;
                         element.disase = snapshot2.val().disaseInfo;
+                        element.url = snapshot2.val().profile.url;
                         console.log(element.name);
                         console.log(element.requesterUid);
                         console.log(element.province);

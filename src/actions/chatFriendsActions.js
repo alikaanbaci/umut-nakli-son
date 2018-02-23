@@ -28,21 +28,32 @@ export const actChatFriendsLoad = () => {
                 console.log("chatfriends uid");
                 console.log(gelen.friendsUid);
                 const database2 = firebase.database();
-                database2.ref('kullanicilar/' + gelen.friendsUid + '/name')
+                database2.ref('kullanicilar/' + gelen.friendsUid)
                 .on('value', (snapshot2) => {
-                console.log("CHAT FRIENDS LOAD gelen user:");
-                const element = {};
-                element.name = snapshot2.val();
-                element.friendsUid = gelen.friendsUid;
-                console.log(element.name);
-                console.log(element.friendsUid);
-                arr.push(element);
+                console.log("CHAT FRIENDS LOAD gelen snapshot2:");
+                console.log(snapshot2.val());
+
+                //snapshot2.forEach(() => {
+                    //console.log("chatfriendsactionsdaki snapshot2");
+                    //console.log(snapshot2.val());
+                    const element = {};
+                    element.name = snapshot2.val().name;
+                    element.friendsUid = gelen.friendsUid;
+                    element.age = snapshot2.val().age;
+                    element.disase = snapshot2.val().disaseInfo.profileType;
+                    element.url = snapshot2.val().profile.url;
+                    console.log("icerdeki foreachte olusan element");
+                    console.log(element);
+                    arr.push(element);
+                    
+                //});
+                
+                });
                 }
-                );
-                }
+                dispatch({ type: CHAT_FRIENDS_LOAD, payload: arr });
         });
                 console.log(arr);
-                dispatch({ type: CHAT_FRIENDS_LOAD, payload: arr });
+                //dispatch({ type: CHAT_FRIENDS_LOAD, payload: arr });
     }
 });
         };

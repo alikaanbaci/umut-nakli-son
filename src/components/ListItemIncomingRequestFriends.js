@@ -32,6 +32,7 @@ class ListItemIncomingRequestFriends extends Component {
 
     render() {
         const { name, uid, province, age } = this.props.requester;
+        const profile = this.props.requester.url;
         let disase;
         if (this.props.disaseInfo === undefined){
              disase = {};
@@ -48,7 +49,7 @@ class ListItemIncomingRequestFriends extends Component {
                 <View>
                 <Text style={styles.headerStyle}> { name } </Text>
                     <View style={styles.subContainerStyle} >
-                        <Image source={require('../images/alikaanbaci.jpg')} style={{ borderRadius: 30, width: 70, height: 70 }} />
+                        <Image source={{uri: profile}} style={{ borderRadius: 30, width: 70, height: 70 }} />
                         <Image source={require('../icons/winner.png')} style={{ width: 50, height: 50 }} />
                         <View style={styles.textContainerStyle}>
                         <Text style={styles.textStyle}>Kanser Türü:{ disase.disaseType }</Text>

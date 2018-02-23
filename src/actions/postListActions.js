@@ -15,7 +15,7 @@ export const actPostChanged = ({ stPost }) => {
 export const actPostCreate = ( { prPost } ) => {
     console.log('actPostCreate metodu calıştı.');
     console.log( { prPost } );
-    const { currentUser } = firebase.auth();
+    
     console.log("current user");
     console.log(currentUser.uid);
 
@@ -56,9 +56,22 @@ export const actPostLoad = ({ user }) => {
     console.log('actPostLoad metodu çalıştı, gelen user');
     console.log(user);
     const { currentUser } = firebase.auth();
+    let uid;
+    if (user.uid === undefined) {
+        if (user.friendsUid === undefined){
+            uid = currentUser.uid;
+        }
+        else {
+            uid = user.friendsUid;
+        } 
+    }
+    else {
+        uid = user.uid;
+    }
+    
     console.log('firebase.auth sonucu :' + currentUser);
     return (dispatch) => {
-        firebase.database().ref('/kullanicilar/'+ user.uid +'/postlar')
+        firebase.database().ref('/kullanicilar/' + uid + '/postlar')
             .on('value', snapshot => {
                 if (snapshot.val() === null)
                 {

@@ -26,7 +26,7 @@ class ListDiscoverFriends extends Component {
     }
 
     renderRow(name, uid) {
-       return <ListItemDiscoverFriends name={ name } uid={uid} disaseInfo={name.disaseInfo} />;
+       return <ListItemDiscoverFriends name={ name } uid={uid} disaseInfo={name.disaseInfo} profile={name.profile} />;
     }
     goSendedRequest() {
       Actions.sendedrequests();
@@ -76,8 +76,8 @@ class ListDiscoverFriends extends Component {
 }
 
 const mapStateToProps = ({ nonFriendsResponse }) => { 
-    const nonFriendsArray = _.map(nonFriendsResponse, ({ name, age, disaseInfo, province }, uid ) => {
-        return { name, age, uid, disaseInfo, province };
+    const nonFriendsArray = _.map(nonFriendsResponse, ({ name, age, disaseInfo, province, profile }, uid ) => {
+        return { name, age, uid, disaseInfo, province, profile };
     });
     console.log("burasi ListDiscoverFriendsin mapstatetopropsu** : ");
     console.log(nonFriendsArray);

@@ -26,7 +26,7 @@ class ListItem extends Component {
                         <Image source={require('../images/alikaanbaci.jpg')} style={{borderRadius:30, flex:1, /*width: 70,*/ height: 70 }} />
                         <Text style={styles.postStyle} > {prPost} </Text>
                         <Button onPress={() => Actions.post_detay({ clickedPost: obj })} 
-                                title="GÖNDERİYİ GÖR" /> 
+                                title="GÖNDERİYİ AC" /> 
                     </CardSection>
                 </View>
             //</TouchableWithoutFeedback>

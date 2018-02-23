@@ -23,30 +23,31 @@ import Chat from './components/Chat';
 import ListChat from './components/ListChat';
 import GalleryForm from './components/GalleryForm';
 
+
 const HomeIcon = ()=> {
     return (
-        <Image source={require('./icons/house.png')} style={{ width: 40, height: 40 }} />
+        <Image source={require('./icons/if_home_blue_68743.png')} style={{ width: 50, height: 50 }} />
         //<Text style={{ color: selected ? 'red' : 'black' }} > {title} </Text>
     );
 };
 
 const MessageIcon = ()=> {
     return (
-        <Image source={require('./icons/envelope.png')} style={{ width: 40, height: 40 }} />
+        <Image source={require('./icons/if_balloon_blue_68668.png')} style={{ width: 50, height: 50 }} />
         //<Text style={{ color: selected ? 'red' : 'black' }} > {title} </Text>
     );
 };
 
 const ProfileIcon = ()=> {
     return (
-        <Image source={require('./icons/avatar.png')} style={{ width: 40, height: 40 }} />
+        <Image source={require('./icons/if_users_blue_68832.png')} style={{ width: 50, height: 50 }} />
         //<Text style={{ color: selected ? 'red' : 'black' }} > {title} </Text>
     );
 };
 
 const FriendsIcon = ()=> {
     return (
-        <Image source={require('./icons/magnifying-glass.png')} style={{ width: 40, height: 40 }} />
+        <Image source={require('./icons/if_search_blue_68804.png')} style={{ width: 50, height: 50 }} />
         //<Text style={{ color: selected ? 'red' : 'black' }} > {title} </Text>
     );
 };
@@ -60,7 +61,7 @@ const TabIcon = ()=> {
 
 const EditIcon = ()=> {
     return (
-        <Image source={require('./icons/settings.png')} style={{ width: 40, height: 40 }} />
+        <Image source={require('./icons/if_user_blue_68830.png')} style={{ width: 50, height:50 }} />
         //<Text style={{ color: selected ? 'red' : 'black' }} > {title} </Text>
     );
 };
@@ -169,7 +170,10 @@ class RouterComponent extends Component {
                     <Scene key="mosu_message" title="MESAJ" icon={MessageIcon}>
 
                        <Scene 
-                            key="recent_talking_form" 
+                            key="recent_talking_form"
+                            onLeft={() => console.log("zuhauhua")}
+                        renderLeftButton={() =>
+                         <Image source={require('./images/logomuz2.png')} style={{ width: 40, height: 35 }} />} 
                             component={ListChat} 
                             navigationBarStyle={{ backgroundColor: '#e0ebeb' }}
                             title="Son Konuşulanlar"
@@ -180,6 +184,9 @@ class RouterComponent extends Component {
                         <Scene 
                             key="chat" 
                             component={Chat} 
+                            onLeft={() => console.log("zuhauhua")}
+                        renderLeftButton={() =>
+                         <Image source={require('./images/logomuz2.png')} style={{ width: 40, height: 35 }} />}
                             navigationBarStyle={{ backgroundColor: '#e0ebeb' }}
                             title="Mesajlarım"
                             titleStyle={{color:'black',fontSize: 17,
@@ -195,7 +202,7 @@ class RouterComponent extends Component {
                             navigationBarStyle={{ backgroundColor: '#e0ebeb' }}
                             onLeft={() => console.log("zuhauhua")}
                             renderLeftButton={() =>
-                             <Image source={require('./images/logomuz.jpg')} style={{ width: 40, height: 35 }} />} 
+                             <Image source={require('./images/logomuz2.png')} style={{ width: 40, height: 35 }} />} 
                             title="Profil"
                             titleStyle={{color:'black',fontSize: 17,
                              textShadowColor:'dimgray', textShadowOffset:{width:1,height:1}}} 
@@ -211,8 +218,7 @@ class RouterComponent extends Component {
                             title="Resim Yükle"
                             titleStyle={{color:'black',fontSize: 17,
                              textShadowColor:'dimgray', textShadowOffset:{width:1,height:1}}} 
-                        /> 
-                        
+                        />
                     </Scene>
 
                     <Scene key="mosu_friends" title="SİZE UYGUN KAHRAMANLAR" icon={FriendsIcon}>
@@ -222,7 +228,7 @@ class RouterComponent extends Component {
                             component={ListDiscoverFriends}
                             onLeft={() => console.log("zuhauhua")}
                             renderLeftButton={() =>
-                             <Image source={require('./images/logomuz.jpg')} style={{ width: 40, height: 35 }} />} 
+                             <Image source={require('./images/logomuz2.png')} style={{ width: 40, height: 35 }} />} 
                             navigationBarStyle={{ backgroundColor: '#e0ebeb' }}
                             title="Arkadaş Bul"
                             titleStyle={{color:'black',fontSize: 17,
@@ -275,7 +281,7 @@ class RouterComponent extends Component {
                             component={ListFriends}
                             onLeft={() => console.log("zuhauhua")}
                             renderLeftButton={() =>
-                             <Image source={require('./images/logomuz.jpg')} style={{ width: 40, height: 35 }} />} 
+                             <Image source={require('./images/logomuz2.png')} style={{ width: 40, height: 35 }} />} 
                             navigationBarStyle={{ backgroundColor: '#e0ebeb' }}
                             title="Arkadaşlarım" 
                             titleStyle={{color:'black',fontSize: 17,

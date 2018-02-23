@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { View, TextInput, Alert,Image, Text, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
+import Toast from 'react-native-simple-toast';
+import DropdownAlert from 'react-native-dropdownalert';
 import { actEmailChanged, actPasswordChanged, actUserLogin } from '../actions';
 //import action from '../actions';
-
 import { Button, CardSection, Card, Header, FacebookButton } from '../ortak';
 import { Actions } from 'react-native-router-flux';
 
@@ -12,7 +13,18 @@ const window = Dimensions.get('window');
 
 class LoginForm extends Component {
    //state = { kullaniciadi: '', sifre: ''};
-
+   
+  onError = error => {
+    if (error) {
+      this.dropdown.alertWithType('error', 'Error', error);
+    }
+  };
+  // ...
+  onClose(data) {
+    // data = {type, title, message, action}
+    // action means how the alert was closed.
+    // returns: automatic, programmatic, tap, pan or cancel
+  }
    OnClickLogin() {
     console.log('LoginFormjsteki OnClickLogin fonksiyonu tamamlandı'); 
     const { prUsername, prPassword } = this.props;
@@ -82,7 +94,6 @@ class LoginForm extends Component {
                 onChangeText={degisentext => this.props.actEmailChanged({ stUsername: degisentext })}
                 />
               </CardSection>
-
               <CardSection>
                 <TextInput
                   secureTextEntry
@@ -103,7 +114,8 @@ class LoginForm extends Component {
                 </View>
               </CardSection>
               <CardSection>
-                <FacebookButton onPress={this.OnClickLogin.bind(this)}> FACEBOOK ILE GİRİŞ YAP </FacebookButton>
+                <FacebookButton onPress={() => Toast.show('Facebook ile giriş yazmadın ki',Toast.SHORT)} > 
+                                          FACEBOOK ILE GİRİŞ YAP </FacebookButton>
               </CardSection>
             </View>
           </View>
@@ -134,8 +146,8 @@ const mapStateToProps = ({ authenticationResponse }) => {
    let prUsername = username;
    let prPassword = password;
 
-   prUsername = 'ddd@gmail.com';
-   prPassword = 'ddd123'; 
+   prUsername = 'bbb@gmail.com';
+   prPassword = 'bbb123'; 
    
    //console.log('mapstatetoprops kullaniciadi :' + prUsername);
    //console.log('mapstatetoprops sifre ' + prPassword);

@@ -10,8 +10,10 @@ export const actFriendsLoad = () => {
     return (dispatch) => {
         database.ref('kullanicilar/' + currentUser.uid + '/friends')
     .on('value', snapshot => {
+        console.log("on calisti");
         if (snapshot.val() === null)
-        {
+        {   
+            console.log("if calisti");
             dispatch({ type: FRIENDS_LOAD, payload: {} });
         }
         else {
@@ -21,19 +23,27 @@ export const actFriendsLoad = () => {
                 console.log("friends uid");
                 console.log(gelen.friendsUid);
                 const database2 = firebase.database();
-                database2.ref('kullanicilar/' + gelen.friendsUid + '/name')
+                database2.ref('kullanicilar/' + gelen.friendsUid)
                 .on('value', (snapshot2) => {
                 console.log("FRIENDS LOAD gelen user:");
+                console.log(snapshot2.val());
                 const element = {};
-                element.name = snapshot2.val();
+                element.name = snapshot2.val().name;
+                element.age = snapshot2.val().age;
+                element.province = snapshot2.val().province;
+                element.disase = snapshot2.val().disaseInfo;
                 element.friendsUid = gelen.friendsUid;
-                console.log(element.name);
-                console.log(element.friendsUid);
+                element.url = snapshot2.val().profile.url;
+                //console.log(element.name);
+                //console.log(element.friendsUid);
+
                 arr.push(element);
+                //console.log(arr);
+                //dispatch({ type: FRIENDS_LOAD, payload: arr });
             });
         });
-                console.log(arr);
-                dispatch({ type: FRIENDS_LOAD, payload: arr });
+               console.log(arr);
+               dispatch({ type: FRIENDS_LOAD, payload: arr });
     }
 });
         };

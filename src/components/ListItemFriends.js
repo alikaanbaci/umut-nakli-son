@@ -5,25 +5,60 @@ import { CardSection } from '../ortak';
 
 class ListItemFriends extends Component {
 
+    constructor(props) {
+        super(props);
+        let disase;
+        if (this.props.disaseInfo === undefined){
+             disase = {};
+        } else {
+             disase = this.props.disaseInfo;
+        }
+        this.state = { durum: disase.profileType };
+        
+    
+        // Toggle the state every second
+        /*setInterval(() => {
+          this.setState({ showText: !this.state.durum });
+        }, 1000);*/
+      }
+
+      renderImage() {
+        if (this.state.durum === 'savasci') {
+            return <Image source={require('../icons/warrior.png')} style={{ width: 50, height: 50 }} />;
+        }
+        else {
+            return <Image source={require('../icons/winner.png')} style={{ width: 50, height: 50 }} />;
+        }
+    }
+
     goProfile2() {
-        Actions.profilefriend();
+        Actions.profilefriend({ user: this.props.friend, disaseInfo: this.props.disaseInfo });
     }
 
     render() {
-        //const { prPost } = this.props.post;
+        console.log("listitem friendse gelen friend propsu:");
+        console.log(this.props.friend);
+        let disase;
+        if (this.props.disaseInfo === undefined){
+             disase = {};
+        } else {
+             disase = this.props.disaseInfo;
+        }
+        console.log("listitem friendse gelen disaseInfo propsu");
+        console.log(this.props.disaseInfo);
         return (
             //<TouchableWithoutFeedback onPress={this.onPostClick.bind(this)}>
             <TouchableWithoutFeedback onPress={() => console.log("tiklama ulan")}>
                 <View>
                 <Text style={styles.headerStyle}> {this.props.friend.name} </Text>
                     <View style={styles.subContainerStyle} >
-                        <Image source={require('../images/kanserhastasi1.png')} style={{borderRadius:30, width: 70, height: 70 }} />
-                        <Image source={require('../icons/warrior.png')} style={{ width: 50, height: 50 }} />
+                        <Image source={{uri: this.props.friend.url}} style={{borderRadius:30, width: 70, height: 70 }} />
+                        {this.renderImage()}
                         <View style={styles.textContainerStyle}>
-                        <Text style={styles.textStyle}>Kanser Türü:Kemik Kanseri</Text>
-                        <Text style={styles.textStyle}>Evre:2B</Text>
-                        <Text style={styles.textStyle}>Yaş: 21</Text>
-                        <Text style={styles.textStyle}>Şehir: Karabük</Text>
+                        <Text style={styles.textStyle}>Kanser Türü:{disase.disaseType}</Text>
+                        <Text style={styles.textStyle}>Evre:{disase.disaseStage}</Text>
+                        <Text style={styles.textStyle}>Yaş:{this.props.friend.age}</Text>
+                        <Text style={styles.textStyle}>Şehir:{this.props.friend.age}</Text>
                         </View>
                         <TouchableOpacity 
                          onPress={() => Actions.chat({ user: this.props.friend })} 

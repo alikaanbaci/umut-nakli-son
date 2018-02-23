@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableWithoutFeedback, TouchableOpacity, Image, Button, StyleSheet } from 'react-native';
+import { Text, View, TouchableWithoutFeedback, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { CardSection } from '../ortak';
+import { CardSection,Button } from '../ortak';
 
 class ListItemOtherPosts extends Component {
 
@@ -21,8 +21,8 @@ class ListItemOtherPosts extends Component {
                     <CardSection>
                         <Image source={require('../images/alikaanbaci.jpg')} style={{borderRadius:30, flex:1, /*width: 70,*/ height: 70 }} />
                         <Text style={styles.postStyle} > {post} </Text>
-                        <Button onPress={() => Actions.post_detay({ clickedPost: this.props.post })} 
-                                title="GÖNDERİYİ GÖR" /> 
+                        <Button onPress={() => Actions.post_detay({ clickedPost: this.props.post })}>
+                          Gönderi Detayı </Button>        
                     </CardSection>
                 </View>
             //</TouchableWithoutFeedback>

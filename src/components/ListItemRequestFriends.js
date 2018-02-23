@@ -23,11 +23,18 @@ class ListItemRequestFriends extends Component {
         const name = this.props.requester.name;
         const age = this.props.requester.age;
         const province = this.props.requester.province;
+        //const profile = this.props.requester.url;
         let disase;
         if (this.props.requester.disase === undefined){
              disase = {};
         } else {
              disase = this.props.requester.disase;
+        }
+        let profile;
+        if (this.props.requester === undefined){
+            profile = {};
+        } else {
+            profile = this.props.requester.url;
         }
         console.log('ListItemRequestFriends e gelen veri-->');
         console.log(name);
@@ -39,7 +46,7 @@ class ListItemRequestFriends extends Component {
                 <View>
                 <Text style={styles.headerStyle}> { name } </Text>
                     <View style={styles.subContainerStyle} >
-                        <Image source={require('../images/alikaanbaci.jpg')} style={{ borderRadius: 30, width: 70, height: 70 }} />
+                        <Image source={{uri: profile}} style={{ borderRadius: 30, width: 70, height: 70 }} />
                         <Image source={require('../icons/winner.png')} style={{ width: 50, height: 50 }} />
                         <View style={styles.textContainerStyle}>
                         <Text style={styles.textStyle}>Kanser Türü:{disase.disaseType}</Text>

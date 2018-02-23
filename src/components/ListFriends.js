@@ -27,7 +27,7 @@ class ListFriends extends Component {
      renderRow(name) {
         console.log("list item friends'den oncesi");
         console.log(name);
-        return <ListItemFriends friend={name} />;
+        return <ListItemFriends friend={name} disaseInfo={name.disase} />;
     }
 
     render() {
