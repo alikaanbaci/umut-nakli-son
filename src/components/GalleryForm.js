@@ -92,10 +92,15 @@ class GalleryForm extends Component {
       }
       render() {
         return (
+            
         <View style={styles.container}>
             <CameraRollPicker callback={this.getSelectedImages} />
-            <Button onPress={() => this.selectedForNormal(this.callback)} > Resmi Yükle </Button>
-            <Button onPress={() => this.selectedForProfile(this.callback)} > Profil Resmi Yükle </Button>
+            <View style={styles.subContainerStyle}>
+                <Button onPress={() => this.selectedForNormal(this.callback)} > Resmi Yükle </Button>
+            </View>
+            <View style={styles.subContainerStyle2}>
+                <Button onPress={() => this.selectedForProfile(this.callback)} > Profil Resmi Yükle </Button>
+            </View>
         </View>
         );
       }
@@ -113,6 +118,25 @@ const styles = StyleSheet.create(
             //alignItems: 'center',
             backgroundColor: 'white'
         },
+        subContainerStyle: {
+            borderBottomWidth: 1,
+            padding: 5,
+            backgroundColor: '#fff',
+            justifyContent: 'center',
+            flexDirection: 'row',
+            borderColor: '#ddd',
+            position: 'relative',
+      },
+        subContainerStyle2: {
+            borderBottomWidth: 1,
+            padding: 5,
+            backgroundColor: '#fff',
+            justifyContent: 'center',
+            flexDirection: 'row',
+            borderColor: '#ddd',
+            position: 'relative',
+            marginBottom: 50
+      },
         navBar: {
             height: 65,
             backgroundColor: 'white',

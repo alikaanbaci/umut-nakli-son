@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Text, View, Image,TextInput } from 'react-native';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { Kaede } from 'react-native-textinput-effects';
 import { actProfileLoad } from '../actions';
 import { CardSection, Button } from '../ortak/index';
 
@@ -100,59 +102,61 @@ class ContentMyProfile extends Component {
 
         return (
             <View>
-               <View style={styles.subContainerStyle} >
-                    <TextInput style={styles.inputStyle}
-                     placeholder={this.props.profile.name}
-                     value={this.state.stName}
-                     onChangeText={degisen => this.setState({stName: degisen })}  
-                    />
+                <View style={styles.subContainerStyle} >
+                <Kaede
+                    style={styles.inputStyle}
+                    label={this.props.profile.name}
+                    placeholder={this.props.profile.name} 
+                    label='İsim'
+                    onChangeText={degisen => this.setState({stName: degisen })}
+                />
                 </View>
                 <View style={styles.subContainerStyle} >
-                    <TextInput style={styles.inputStyle} 
+                    <Kaede style={styles.inputStyle} 
                     placeholder={this.props.profile.email} 
-                    value={this.state.stEmail}
+                    label='Email'
                     onChangeText={degisen => this.setState({stEmail: degisen })}  
                     />
                 </View>
                 <View style={styles.subContainerStyle} >
-                    <TextInput style={styles.inputStyle} 
+                    <Kaede style={styles.inputStyle} 
                     placeholder={this.props.profile.age} 
-                    value={this.state.stAge}
+                    label='Yaş'
                     onChangeText={degisen => this.setState({stAge: degisen })}  
                     />
                 </View>
                 <View style={styles.subContainerStyle} >
-                    <TextInput style={styles.inputStyle} 
+                    <Kaede style={styles.inputStyle} 
                     placeholder={this.props.profile.province} 
-                    value={this.state.stProvince}
+                    label='Şehir'
                     onChangeText={degisen => this.setState({stProvince: degisen })}  
                     />
                 </View>
                 <View style={styles.subContainerStyle} >
-                    <TextInput style={styles.inputStyle}
+                    <Kaede style={styles.inputStyle}
                      placeholder={this.props.disase.disaseType} 
-                     value={this.state.stDisaseType}
+                     label='Hastalık Türü'
                      onChangeText={degisen => this.setState({stDisaseType: degisen })}  
                     />
                 </View>
                 <View style={styles.subContainerStyle} >
-                    <TextInput style={styles.inputStyle} 
+                    <Kaede style={styles.inputStyle} 
                     placeholder={this.props.disase.disaseStage}
-                    value={this.state.stDisaseStage}
+                    label='Hastalık Aşaması'
                     onChangeText={degisen => this.setState({stDisaseStage: degisen })}  
                     />
                 </View>
                 <View style={styles.subContainerStyle} >
-                    <TextInput style={styles.inputStyle} 
+                    <Kaede style={styles.inputStyle} 
                     placeholder={this.props.disase.cureNumber} 
-                    value={this.state.stCureNumber}
+                    label='Kür'
                     onChangeText={degisen => this.setState({stCureNumber: degisen })}  
                     />
                 </View>
                 <View style={styles.subContainerStyle} >
-                    <TextInput style={styles.inputStyle} 
+                    <Kaede style={styles.inputStyle} 
                     placeholder={this.props.disase.hospital} 
-                    value={this.state.stHospital}
+                    label='Hastane'
                     onChangeText={degisen => this.setState({stHospital: degisen })}  
                     />
                 </View>

@@ -18,7 +18,7 @@ class CreatePostForm extends Component {
         console.log('CreatePostForm render oldu: ' + this.props.prPost);
         return (
             //<Text>CreatePostForm</Text>
-            <View style={{ marginBottom: 50 }}>
+            <View style={{ /*marginBottom: 50*/ }}>
                 <CardSection>
                     <TextInput
                         multiline={true}

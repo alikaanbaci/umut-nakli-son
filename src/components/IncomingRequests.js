@@ -33,6 +33,9 @@ class IncomingRequests extends Component {
         console.log(name.disase);
         return <ListItemIncomingRequestFriends requester={name} disaseInfo={name.disase} /*uid={uid}*/ />;
     }
+    goListDiscoverFriends(){
+        Actions.discover_friends();
+    }
     goSendedRequest() {
         Actions.sendedrequests();
     }
@@ -45,21 +48,24 @@ class IncomingRequests extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.subContainerStyle}>
-                        <TouchableOpacity
-                          style={{ backgroundColor:'cyan' , justifyContent:'center', padding: 5}} 
-                          onPress={() => console.log('HAKKINDAya basıldı')}> 
-                          <Text style={{padding: 5}} >ARKADAŞ BUL</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                          style={{ backgroundColor:'#4af083' , justifyContent:'center', padding: 5 }} 
-                          onPress={() => this.goSendedRequest()}> 
-                          <Text style={{padding: 5}} > GONDERİLENDER </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity 
-                          style={{ backgroundColor:'purple' , justifyContent:'center', padding: 5 }} 
-                          onPress={() => this.goIncomingRequest()}> 
-                          <Text style={{padding: 5}} > GELENLER </Text>
-                        </TouchableOpacity>
+                    <TouchableOpacity
+                        style={{borderColor: '#0281A4',
+                        height: 35, borderBottomWidth: 3, width: 130, alignItems: 'center'}} 
+                        onPress={() => this.goListDiscoverFriends()}> 
+                        <Text style={{padding: 5}} >ARKADAŞ BUL</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                        style={{borderColor: '#0281A4',
+                        height: 35, borderBottomWidth: 3, width: 130, alignItems: 'center'}} 
+                        onPress={() => this.goSendedRequest()}> 
+                        <Text style={{padding: 5}} > GONDERİLENDER </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                        style={{borderColor: '#03AFEE',
+                        height: 35, borderBottomWidth: 4, width: 130, alignItems: 'center'}} 
+                        onPress={() => this.goIncomingRequest()}> 
+                        <Text style={{padding: 5}} > GELENLER </Text>
+                    </TouchableOpacity>
                 </View>
                 <ListView
                     enableEmptySections

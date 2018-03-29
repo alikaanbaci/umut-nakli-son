@@ -57,7 +57,7 @@ class ListItemIncomingRequestFriends extends Component {
                         <Text style={styles.textStyle}>Yaş: { age }</Text>
                         <Text style={styles.textStyle}>Şehir: { province }</Text>
                         </View>
-                        <TouchableOpacity onPress={() => Actions.profilenonfriend({ propuser: this.props.requester, userDisase: disase })} style={styles.buttonStyle}>
+                        <TouchableOpacity onPress={() => Actions.profilenonfriend({ propuser: this.props.requester, userDisase: disase, profileUrl: profile })} style={styles.buttonStyle}>
                             <Image source={require('../icons/ekle.jpg')} style={{ alignSelf: 'center', width: 30, height: 30 }} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.addFirends(this.props.requester.requesterUid)} style={styles.buttonStyle}>

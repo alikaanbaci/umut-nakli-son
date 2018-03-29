@@ -83,7 +83,7 @@ class ListItemDiscoverFriends extends Component {
                         <Text style={styles.textStyle}>Yaş: {age}</Text>
                         <Text style={styles.textStyle}>Şehir: {province}</Text>
                         </View>
-                        <TouchableOpacity onPress={() => Actions.profilenonfriend({ propuser: this.props.name, userDisase: disase })} style={styles.buttonStyle}>
+                        <TouchableOpacity onPress={() => Actions.profilenonfriend({ propuser: this.props.name, userDisase: disase, profileUrl: profile.url })} style={styles.buttonStyle}>
                             <Image source={require('../icons/ekle.jpg')} style={{ alignSelf: 'center', width: 30, height: 30 }} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.sendFriendshipRequest(uid, name)} style={styles.buttonStyle}>

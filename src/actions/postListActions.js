@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
+import _ from 'lodash';
 import { POST_CHANGED, POST_CREATE, POST_LOAD, OTHER_POST_LOAD } from './types';
 
 export const actPostChanged = ({ stPost }) => {
@@ -16,6 +17,8 @@ export const actPostCreate = ( { prPost } ) => {
     console.log('actPostCreate metodu calıştı.');
     console.log( { prPost } );
     
+    const { currentUser } = firebase.auth();
+
     console.log("current user");
     console.log(currentUser.uid);
 
@@ -33,11 +36,11 @@ export const actPostCreate = ( { prPost } ) => {
 
 
     return (dispatch) => {
-        firebase.database().ref(`/kullanicilar/${currentUser.uid}/postlar`)
+         firebase.database().ref(`/kullanicilar/${currentUser.uid}/postlar`)
             .push({ prPost })
                 .then(() => {
                     dispatch({ type: POST_CREATE });
-                    Actions.pop();
+                    //Actions.pop();
                 });
     }
 };
@@ -85,19 +88,52 @@ export const actPostLoad = ({ user }) => {
     };
 };
 
-export const actOtherPostsLoad = () => {
-    console.log('actOtherPostLoad metodu çalıştı');
-    return (dispatch) => {
-       firebase.database().ref('postlar')
-       .on('value', snapshot => {
-           if(snapshot.val() === null)
-           {
-            dispatch({ type: OTHER_POST_LOAD, payload: {} });
-           }
-           else {
-            dispatch({ type: OTHER_POST_LOAD, payload: snapshot.val() });
-           }
+//const arr = [];
 
-       }); 
-    };
+export const actOtherPostsLoad = () => {
+    console.log('actOtherPostLoad metodu çalıştı-0');
+    let info;
+    const arr = [];
+    let postArr = [];
+    console.log('calist-1');
+    const prms = firebase.database().ref('postlar').once('value');
+    console.log('calist-1.1');
+    return (dispatch) => {
+        const prms_then =  prms.then( snapshot => {
+            console.log('calist-2');
+            console.log(snapshot.val());
+            console.log('calist-3');
+            info = snapshot.val();
+            console.log(info);
+            console.log('calist-4');
+            postArr = _.map(info, ({ post, owner }, uid) => {
+                 return { post, owner, uid };
+                });
+            console.log(postArr);
+            console.log('calisti-5');
+            const nmbr = snapshot.numChildren();
+            let count = 0;
+            console.log(nmbr);
+            snapshot.forEach(snap => {
+                console.log('calisti-5.1');
+                const d =  firebase.database().ref('kullanicilar/' + snap.val().owner).once('value').then((data) => {
+                    console.log("son adım");
+                    console.log(data.val());
+                    let elements = {};
+                    elements.user = data.val().name;
+                    elements.uri = data.val().profile.url;
+                    elements.post = postArr[count].post;
+                    console.log(postArr[count].post);
+                    arr.push(elements);
+                    count++;
+                    if(nmbr == count){
+                        console.log("son adım 2");
+                        dispatch({ type: POST_LOAD, payload: arr });
+                    }
+                });
+                //console.log('calisti-5.2');
+                //return d;
+                });
+        });
+    }
 };

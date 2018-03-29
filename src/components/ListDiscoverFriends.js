@@ -24,9 +24,12 @@ class ListDiscoverFriends extends Component {
         });
         this.dataSource = ds.cloneWithRows(nonFriendsArray);
     }
-
+    
     renderRow(name, uid) {
        return <ListItemDiscoverFriends name={ name } uid={uid} disaseInfo={name.disaseInfo} profile={name.profile} />;
+    }
+    goListDiscoverFriends(){
+        Actions.discover_friends();
     }
     goSendedRequest() {
       Actions.sendedrequests();
@@ -41,17 +44,20 @@ class ListDiscoverFriends extends Component {
             <View style={styles.container}>
             <View style={styles.subContainerStyle}>
                 <TouchableOpacity
-                   style={{ backgroundColor:'cyan' , justifyContent:'center', padding: 5}} 
-                   onPress={() => console.log('HAKKINDAya basıldı')}> 
+                   style={{borderColor: '#03AFEE',
+                   height: 35, borderBottomWidth: 4, width: 130, alignItems: 'center'}} 
+                   onPress={() => this.goListDiscoverFriends()}> 
                    <Text style={{padding: 5}} >ARKADAŞ BUL</Text>
                </TouchableOpacity>
                <TouchableOpacity 
-                   style={{ backgroundColor:'#4af083' , justifyContent:'center', padding: 5 }} 
+                   style={{borderColor: '#0281A4',
+                   height: 35, borderBottomWidth: 3, width: 130, alignItems: 'center'}} 
                    onPress={() => this.goSendedRequest()}> 
                    <Text style={{padding: 5}} > GONDERİLENDER </Text>
                </TouchableOpacity>
                <TouchableOpacity 
-                   style={{ backgroundColor:'purple' , justifyContent:'center', padding: 5 }} 
+                   style={{borderColor: '#0281A4',
+                   height: 35, borderBottomWidth: 3, width: 130, alignItems: 'center'}} 
                    onPress={() => this.goIncomingRequest()}> 
                   <Text style={{padding: 5}} > GELENLER </Text>
               </TouchableOpacity>

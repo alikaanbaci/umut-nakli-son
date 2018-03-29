@@ -146,8 +146,8 @@ const mapStateToProps = ({ authenticationResponse }) => {
    let prUsername = username;
    let prPassword = password;
 
-   prUsername = 'bbb@gmail.com';
-   prPassword = 'bbb123'; 
+   prUsername = 'aaa@gmail.com';
+   prPassword = 'aaa123'; 
    
    //console.log('mapstatetoprops kullaniciadi :' + prUsername);
    //console.log('mapstatetoprops sifre ' + prPassword);

@@ -10,7 +10,9 @@ class ProfileFriends extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { postlarigetir: 'hayir' , durum: this.props.disaseInfo.profileType };
+        this.state = { postlarigetir: 'hayir' , durum: this.props.disaseInfo.profileType, 
+                selectedInfo: false, selectedPost: false, selectedStory: false
+            };
         
     
         // Toggle the state every second
@@ -20,17 +22,17 @@ class ProfileFriends extends Component {
       }
 
       goPosts() {
-        this.setState({ postlarigetir: 'evet' });
+        this.setState({ postlarigetir: 'evet', selectedInfo: false, selectedPost: true, selectedStory: false });
         console.log('Userin postları yuklendi');
       }
 
       goAbout() {
-        this.setState({ postlarigetir: 'hayir' });
+        this.setState({ postlarigetir: 'hayir', selectedInfo: true, selectedPost: false, selectedStory: false });
         console.log('Userin hakkindasi yuklendi');
       }
 
       goStory() {
-        this.setState({ postlarigetir: 'story' });
+        this.setState({ postlarigetir: 'story', selectedInfo: false, selectedPost: false, selectedStory: true });
         console.log('Userin hakkindasi yuklendi');
       }
 
@@ -71,18 +73,21 @@ class ProfileFriends extends Component {
                 
                 <View style={styles.subContainerStyle}>
                         <TouchableOpacity
-                          style={{ backgroundColor:'cyan' , justifyContent:'center'}} 
-                          onPress={() => this.goAbout()}> 
+                          style={{borderColor: this.state.selectedInfo ? '#03AFEE' : '#0281A4',
+                          height: 35, borderBottomWidth: this.state.selectedInfo ? 4 : 3 , width: 130, alignItems: 'center'}} 
+                         onPress={() => this.goAbout()}> 
                           <Text style={{ flex:2 }}>HAKKINDA</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                          style={{ backgroundColor:'#4af083' , justifyContent:'center' }} 
-                          onPress={() => this.goPosts()}> 
+                          style={{borderColor: this.state.selectedPost ? '#03AFEE' : '#0281A4',
+                          height: 35, borderBottomWidth: this.state.selectedPost ? 4 : 3 , width: 130, alignItems: 'center'}} 
+                         onPress={() => this.goPosts()}> 
                           <Text style={{ flex:2 }}>POSTLAR</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                          style={{ backgroundColor: 'red' , justifyContent:'center' }} 
-                          onPress={() => this.goStory()}> 
+                         style={{borderColor: this.state.selectedStory ? '#03AFEE' : '#0281A4',
+                         height: 35, borderBottomWidth: this.state.selectedStory ? 4 : 3 , width: 130, alignItems: 'center'}} 
+                        onPress={() => this.goStory()}> 
                           <Text style={{ flex:2 }}> SERÜVEN </Text>
                         </TouchableOpacity>
 

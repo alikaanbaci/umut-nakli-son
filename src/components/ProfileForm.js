@@ -15,7 +15,8 @@ import { CardSection, Button } from '../ortak/index';
 class ProfileForm extends Component {
     constructor(props) {
         super(props);
-        this.state = { postlarigetir: 'hayir', user: {}, profile: '' };
+        this.state = { postlarigetir: 'hayir', user: {}, profile: '', selectedInfo: false, selectedPost: false, 
+        selectedStory: false, selectedPhoto: false };
     }
 
     componentWillMount() {
@@ -60,22 +61,22 @@ class ProfileForm extends Component {
     }
 
       goPosts() {
-        this.setState({ postlarigetir: 'evet' });
+        this.setState({ postlarigetir: 'evet', selectedInfo: false, selectedPost: true, selectedStory: false, selectedPhoto: false });
         console.log('Userin postları yuklendi');
       }
 
       goAbout() {
-        this.setState({ postlarigetir: 'hayir' });
+        this.setState({ postlarigetir: 'hayir', selectedInfo: true, selectedPost: false, selectedStory: false, selectedPhoto: false });
         console.log('Userin hakkindasi yuklendi');
       }
 
       goStory() {
-        this.setState({ postlarigetir: 'story' });
+        this.setState({ postlarigetir: 'story', selectedInfo: false, selectedPost: false, selectedStory: true, selectedPhoto: false });
         console.log('Userin storysi yuklendi');
       }
 
       goPhotos() {
-        this.setState({ postlarigetir: 'photos' });
+        this.setState({ postlarigetir: 'photos', selectedInfo: false, selectedPost: false, selectedStory: false, selectedPhoto: true });
         console.log('Userin fotolari yuklendi');
       }
 
@@ -103,7 +104,7 @@ class ProfileForm extends Component {
         console.log('PROFILE FORM render oldu');
         console.log(this.state.user);
         return (
-            <ScrollView style={styles.container}>
+            <ScrollView style={styles.container} >
                 <View style={styles.subContainerStyle} >
                     <Image source={{ uri: this.state.profile }} style={{ width: 100, height: 100 }} />
                     <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }} >
@@ -114,29 +115,33 @@ class ProfileForm extends Component {
                     </View>
                 </View>
 
-                <View style={styles.subContainerStyle}>
+                <View style={styles.subContainerStyle} >
                         <TouchableOpacity
-                          style={{ backgroundColor:'cyan' , justifyContent:'center'}} 
+                          style={{borderColor: this.state.selectedInfo ? '#03AFEE' : '#0281A4',
+                           height: 35, borderBottomWidth: this.state.selectedInfo ? 4 : 3 , width: 100, alignItems: 'center'}} 
                           onPress={() => this.goAbout()}> 
                           <Text style={{ flex:2 }}>BİLGİLERİM</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                          style={{ backgroundColor:'#4af083' , justifyContent:'center' }} 
+                          style={{ height: 35, borderColor: this.state.selectedPost ? '#03AFEE' : '#0281A4',
+                           width: 100, alignItems: 'center', borderBottomWidth: this.state.selectedPost ? 4 : 3 }} 
                           onPress={() => this.goPosts()}> 
                           <Text style={{ flex:2 }}>POSTLARIM</Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                          style={{ backgroundColor: 'red' , justifyContent:'center' }} 
+                          style={{ borderColor: this.state.selectedStory ? '#03AFEE' : '#0281A4',
+                          borderBottomWidth: this.state.selectedStory ? 4 : 3,
+                           height: 35, width: 100, alignItems: 'center' }} 
                           onPress={() => this.goStory()}> 
-                          <Text style={{ flex:2 }}> SERÜVENİM </Text>
+                          <Text style={{ flex: 2}}> SERÜVENİM </Text>
                         </TouchableOpacity>
                         <TouchableOpacity 
-                          style={{ backgroundColor: 'purple' , justifyContent:'center' }} 
+                          style={{ borderColor: this.state.selectedPhoto ? '#03AFEE' : '#0281A4', 
+                          borderBottomWidth: this.state.selectedPhoto ? 4 : 3, height: 35, width: 100, alignItems: 'center' }} 
                           onPress={() => this.goPhotos()}> 
-                          <Text style={{ flex:2 }}> FOTOĞRAFLARIM </Text>
+                          <Text style={{ flex:2 }}> FOTOĞRAFLAR </Text>
                         </TouchableOpacity>
                 </View>
-
                 <View>
                       {this.renderRow()}  
                 </View>

@@ -38,7 +38,7 @@ class PostListForm extends Component {
     }
 
     render() {
-        console.log('post list form render oldu');
+        console.log('post list form render olduu');
         console.log(this.props.postArray);
         const userim = this.props.user;
         console.log(this.props.user);

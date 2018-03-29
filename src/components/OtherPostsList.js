@@ -35,6 +35,7 @@ class OtherPostsList extends Component {
             <View style={styles.container}>
             <CreatePostForm />
                 <ListView
+                    style={{marginBottom: 50}}
                     enableEmptySections
                     dataSource={this.dataSource}
                     renderRow={this.renderRow}
@@ -53,9 +54,11 @@ class OtherPostsList extends Component {
 }
 
 const mapStateToProps = ({ postListResponse }) => { 
-    const postArray = _.map(postListResponse, ({ post }, uid) => {
-        return { post, uid };
-    });
+    //const postArray = _.map(postListResponse, ({ post, owner }, uid) => {
+      // return { post, owner, uid };
+    //});
+    const postArray = postListResponse;
+    console.log("Other post list form mapstatetoprops");
     console.log(postArray);
     return { postArray };
 };
